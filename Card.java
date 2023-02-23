@@ -118,47 +118,47 @@ public class Card {
                 && this.commandSize == otherCard.commandSize;
     }
 
-   public void executeOrder(AnimalStack blueStack, AnimalStack redStack, AnimalSituation situation) {
+    public void executeOrder(AnimalStack blueStack, AnimalStack redStack, AnimalSituation situation) {
     Animal blueTop = blueStack.getTop();
     Animal redTop = redStack.getTop();
     Animal blueBottom = blueStack.getBottom();
     Animal redBottom = redStack.getBottom();
 
-    switch (commandSize) {
-        case 1:
-            if (situation == AnimalSituation.BLUE_TOP_TO_RED_TOP) {
-                // KI : L'animal se trouvant en haut de la pile du podium bleu saute pour rejoindre le sommet de la pile
-                // du podium rouge.
-                redStack.addAtEnd(blueStack.getTop());
-                blueStack.removeAtEnd();
-            } else if (situation == AnimalSituation.RED_TOP_TO_BLUE_TOP) {
-                // LO : L'animal se trouvant en haut de la pile du podium rouge saute pour rejoindre le sommet de la pile
-                // du podium bleu.
-                blueStack.addAtEnd(redStack.getTop());
-                redStack.removeAtEnd();
-            } else if (situation == AnimalSituation.BLUE_BOTTOM_TO_BLUE_TOP) {
-                // NI : L'animal se trouvant en bas de la pile du podium bleu monte et se place en haut de la pile de ce
-                // même podium.
-                blueStack.addAtEnd(blueBottom);
-                blueStack.removeAtStart();
-            } else if (situation == AnimalSituation.RED_BOTTOM_TO_RED_TOP) {
-                // MA : L'animal se trouvant en bas de la pile du podium rouge monte et se place en haut de la pile de
-                // ce même podium.
-                redStack.addAtEnd(redBottom);
-                redStack.removeAtStart();
-            }
-            break;
-        case 2:
-            if (situation == AnimalSituation.BOTH_TOP_TO_BOTH_TOP) {
-                // SO : Les deux animaux se trouvant au sommet des piles des deux podiums échangent leur place.
-                blueStack.addAtEnd(redTop);
-                redStack.removeAtEnd();
-                redStack.addAtEnd(blueTop);
-                blueStack.removeAtEnd();
-            }
-            break;
-        default:
-            break;
+        switch (commandSize) {
+            case 1:
+                if (situation == AnimalSituation.BLUE_TOP_TO_RED_TOP) {
+                    // KI : L'animal se trouvant en haut de la pile du podium bleu saute pour rejoindre le sommet de la pile
+                    // du podium rouge.
+                    redStack.addAtEnd(blueStack.getTop());
+                    blueStack.removeAtEnd();
+                } else if (situation == AnimalSituation.RED_TOP_TO_BLUE_TOP) {
+                    // LO : L'animal se trouvant en haut de la pile du podium rouge saute pour rejoindre le sommet de la pile
+                    // du podium bleu.
+                    blueStack.addAtEnd(redStack.getTop());
+                    redStack.removeAtEnd();
+                } else if (situation == AnimalSituation.BLUE_BOTTOM_TO_BLUE_TOP) {
+                    // NI : L'animal se trouvant en bas de la pile du podium bleu monte et se place en haut de la pile de ce
+                    // même podium.
+                    blueStack.addAtEnd(blueBottom);
+                    blueStack.removeAtStart();
+                } else if (situation == AnimalSituation.RED_BOTTOM_TO_RED_TOP) {
+                    // MA : L'animal se trouvant en bas de la pile du podium rouge monte et se place en haut de la pile de
+                    // ce même podium.
+                    redStack.addAtEnd(redBottom);
+                    redStack.removeAtStart();
+                }
+                break;
+            case 2:
+                if (situation == AnimalSituation.BOTH_TOP_TO_BOTH_TOP) {
+                    // SO : Les deux animaux se trouvant au sommet des piles des deux podiums échangent leur place.
+                    blueStack.addAtEnd(redTop);
+                    redStack.removeAtEnd();
+                    redStack.addAtEnd(blueTop);
+                    blueStack.removeAtEnd();
+                }
+                break;
+            default:
+                break;
+        }
     }
 }
-
