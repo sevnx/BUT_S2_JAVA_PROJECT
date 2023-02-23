@@ -1,26 +1,19 @@
 public class Card {
-    private final AnimalSituation startingLocation;
-    private final AnimalSituation arrivalSituation;
+    private final AnimalSituation situation;
     private final int commandSize;
 
-    public Card(AnimalSituation startingLocation, AnimalSituation arrivalSituation, int commandSize) {
-        this.startingLocation = startingLocation;
-        this.arrivalSituation = arrivalSituation;
+    public Card(AnimalSituation situation, int commandSize) {
+        this.situation = situation;
         this.commandSize = commandSize;
     }
 
     public Card(Card other) {
-        this.startingLocation = new AnimalSituation(other.startingLocation);
-        this.arrivalSituation = new AnimalSituation(other.arrivalSituation);
+        this.situation = new AnimalSituation(other.situation);
         this.commandSize = other.commandSize;
     }
 
-    public AnimalSituation getStartingLocation() {
-        return startingLocation;
-    }
-
-    public AnimalSituation getArrivalSituation() {
-        return arrivalSituation;
+    public AnimalSituation getSituation() {
+        return situation;
     }
 
     public int getCommandSize() {
@@ -36,6 +29,9 @@ public class Card {
         Animal redTop = redStack.getTop();
         Animal blueBottom = blueStack.getBottom();
         Animal redBottom = redStack.getBottom();
+
+        AnimalSituation startingLocation = situation.getStartingLocation();
+        AnimalSituation arrivalSituation = situation.getArrivalSituation();
 
         switch (startingLocation) {
             case BLUE_TOP:
@@ -109,7 +105,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Départ:\n" + startingLocation.toString() + "\nArrivée:\n" + arrivalSituation.toString();
+        return situation.toString();
     }
 
     @Override
@@ -118,52 +114,51 @@ public class Card {
             return false;
         }
         Card otherCard = (Card) other;
-        return this.startingLocation.equals(otherCard.startingLocation)
-                && this.arrivalSituation.equals(otherCard.arrivalSituation)
+        return this.situation.equals(otherCard.situation)
                 && this.commandSize == otherCard.commandSize;
     }
 
-    public void executeOrder(AnimalStack blueStack, AnimalStack redStack) {
-        Animal blueTop = blueStack.getTop();
-        Animal redTop = redStack.getTop();
-        Animal blueBottom = blueStack.getBottom();
-        Animal redBottom = redStack.getBottom();
+   public void executeOrder(AnimalStack blueStack, AnimalStack redStack, AnimalSituation situation) {
+    Animal blueTop = blueStack.getTop();
+    Animal redTop = redStack.getTop();
+    Animal blueBottom = blueStack.getBottom();
+    Animal redBottom = redStack.getBottom();
 
-        switch (commandSize) {
-            case 1:
-                if (startingLocation == AnimalSituation.BLUE_TOP && arrivalSituation == AnimalSituation.RED_TOP) {
-                    // KI : L'animal se trouvant en haut de la pile du podium bleu saute pour rejoindre le sommet de la pile
-                    // du podium rouge.
-                    redStack.addAtEnd(blueStack.getTop());
-                    blueStack.removeAtEnd();
-                } else if (startingLocation == AnimalSituation.RED_TOP && arrivalSituation == AnimalSituation.BLUE_TOP) {
-                    // LO : L'animal se trouvant en haut de la pile du podium rouge saute pour rejoindre le sommet de la pile
-                    // du podium bleu.
-                    blueStack.addAtEnd(redStack.getTop());
-                    redStack.removeAtEnd();
-                } else if (startingLocation == AnimalSituation.BLUE_BOTTOM && arrivalSituation == AnimalSituation.BLUE_TOP) {
-                    // NI : L'animal se trouvant en bas de la pile du podium bleu monte et se place en haut de la pile de ce
-                    // même podium.
-                    blueStack.addAtEnd(blueBottom);
-                    blueStack.removeAtStart();
-                } else if (startingLocation == AnimalSituation.RED_BOTTOM && arrivalSituation == AnimalSituation.RED_TOP) {
-                    // MA : L'animal se trouvant en bas de la pile du podium rouge monte et se place en haut de la pile de
-                    // ce même podium.
-                    redStack.addAtEnd(redBottom);
-                    redStack.removeAtStart();
-                }
-                break;
-            case 2:
-                if (startingLocation == AnimalSituation.BOTH_TOP && arrivalSituation == AnimalSituation.BOTH_TOP) {
-                    // SO : Les deux animaux se trouvant au sommet des piles des deux podiums échangent leur place.
-                    blueStack.addAtEnd(redTop);
-                    redStack.removeAtEnd();
-                    redStack.addAtEnd(blueTop);
-                    blueStack.removeAtEnd();
-                }
-                break;
-            default:
-                break;
-        }
+    switch (commandSize) {
+        case 1:
+            if (situation == AnimalSituation.BLUE_TOP_TO_RED_TOP) {
+                // KI : L'animal se trouvant en haut de la pile du podium bleu saute pour rejoindre le sommet de la pile
+                // du podium rouge.
+                redStack.addAtEnd(blueStack.getTop());
+                blueStack.removeAtEnd();
+            } else if (situation == AnimalSituation.RED_TOP_TO_BLUE_TOP) {
+                // LO : L'animal se trouvant en haut de la pile du podium rouge saute pour rejoindre le sommet de la pile
+                // du podium bleu.
+                blueStack.addAtEnd(redStack.getTop());
+                redStack.removeAtEnd();
+            } else if (situation == AnimalSituation.BLUE_BOTTOM_TO_BLUE_TOP) {
+                // NI : L'animal se trouvant en bas de la pile du podium bleu monte et se place en haut de la pile de ce
+                // même podium.
+                blueStack.addAtEnd(blueBottom);
+                blueStack.removeAtStart();
+            } else if (situation == AnimalSituation.RED_BOTTOM_TO_RED_TOP) {
+                // MA : L'animal se trouvant en bas de la pile du podium rouge monte et se place en haut de la pile de
+                // ce même podium.
+                redStack.addAtEnd(redBottom);
+                redStack.removeAtStart();
+            }
+            break;
+        case 2:
+            if (situation == AnimalSituation.BOTH_TOP_TO_BOTH_TOP) {
+                // SO : Les deux animaux se trouvant au sommet des piles des deux podiums échangent leur place.
+                blueStack.addAtEnd(redTop);
+                redStack.removeAtEnd();
+                redStack.addAtEnd(blueTop);
+                blueStack.removeAtEnd();
+            }
+            break;
+        default:
+            break;
     }
 }
+
