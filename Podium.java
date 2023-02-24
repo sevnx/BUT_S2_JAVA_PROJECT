@@ -1,30 +1,50 @@
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Podium {
-    private Deque<Animal> animals; // The pile of animals
+    private ArrayList<Animal> animals; // The pile of animals
 
     public Podium() {
-        this.animals = new LinkedList<Animal>();
+        this.animals = new ArrayList<>();
     }
 
-    public void addAtEnd(Animal animal) {
-        animals.addLast(animal);
+    public Podium(Animal animal){
+        this();
+        animals.add(animal);
     }
 
-    public void removeAtEnd() {
-        animals.removeLast();
+    public Podium(ArrayList<Animal> animals){
+        this.animals = animals;
     }
 
-    public void removeAtStart() {
-        animals.removeFirst();
+    public Podium(Podium other){
+        this.animals = new ArrayList<>(other.animals);
+    }
+
+    public void addAtTop(Animal animal) {
+        animals.add(animal);
+    }
+
+    public void removeAtTop() {
+        animals.remove(animals.size()-1);
+    }
+
+    public void removeAtBottom() {
+        animals.remove(0);
     }
 
     public Animal getTop() {
-        return animals.peekLast();
+        return animals.get(animals.size()-1);
     }
 
     public Animal getBottom() {
-        return animals.peekFirst();
+        return animals.get(0);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Animal animal : animals)
+            sb.append(animal.toString());
+        return sb.toString();
     }
 }

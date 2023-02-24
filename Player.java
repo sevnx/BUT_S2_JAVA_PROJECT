@@ -1,6 +1,8 @@
 /**
- * Represents a player in the game.
- * A player has a nickname, a score and a status indicating if he has lost the current turn
+ * @file Player.java
+ * @brief Class representing a player in the game.
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @version 1.0
  */
 public class Player {
     private final String nickname;
@@ -21,9 +23,6 @@ public class Player {
         return currentTurnLost;
     }
 
-    /**
-     * Resets the current turn lost status of the player.
-     */
     public void resetCurrentTurnLost(){
         currentTurnLost = false;
     }

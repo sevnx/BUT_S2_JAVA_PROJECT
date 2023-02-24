@@ -1,3 +1,8 @@
+/**
+ * @brief Class representing the game.
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ */
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -76,15 +81,15 @@ public class Game {
 
     //TODO: Maybe transfer into another class (that does input output)
     private void checkCombination(String playerNickname, String combination){
-        assert(combination%Card::COMBINATION_SIZE == 0); // TODO: change to something more appropriate
+        assert(combination.length()%Card.COMMAND_SIZE == 0); // TODO: change to something more appropriate
     }
 
     private void askForCombination() {
         // TODO : Whole function
     }
 
-    private void getSubCommand(String command, int subCommandIndex){
-        int commandStart=subCommandIndex*Card::COMBINATION_SIZE;
-        return command.substring(commandStart,commandStart+Card::COMBINATION_SIZE);
+    private String getSubCommand(String command, int subCommandIndex){
+        int commandStart=subCommandIndex*Card.COMMAND_SIZE;
+        return command.substring(commandStart,commandStart+Card.COMMAND_SIZE);
     }
 }

@@ -1,3 +1,9 @@
+/**
+ * @file PlayerTest.java
+ * @brief Test class for Player.java
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ */
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

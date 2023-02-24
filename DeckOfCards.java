@@ -1,22 +1,17 @@
 import java.util.*;
 
 public class DeckOfCards {
-    private Deque<Card> deck;
+    private ArrayList<Card> deck;
 
-    // Builder who creates the deck of Cards according to the possible starting and ending situations
     public DeckOfCards() {
-        deck = new ArrayDeque<Card>();
-        for (Animal a : Animal.values()) {
-            for (Direction d : Direction.values()) {
-                for (Situation s : Situation.values()) {
-                    Card c = new Card(a, d, s);
-                    deck.add(c);
-                }
-            }
-        }
-        Collections.shuffle((List)deck);
+        deck = new ArrayList<>();
+        generateAllPossibleCards();
     }
 
+    private void generateAllPossibleCards(){
+        // TODO : Generate permutations
+        // TODO : Generate cards from permutations
+    }
     // Method to check if the deck is empty
     public boolean isEmpty() {
         return deck.isEmpty();
@@ -24,6 +19,15 @@ public class DeckOfCards {
 
     // Method to draw a card randomly from the deck
     public Card pickRandomCard() {
-        return deck.pollFirst();
+        return deck.get(0);
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Card card : deck) {
+            sb.append(card.toString());
+            sb.append(System.lineSeparator());
+        }
+        return sb.toString();
     }
 }
