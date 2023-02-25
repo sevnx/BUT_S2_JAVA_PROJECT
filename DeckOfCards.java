@@ -9,9 +9,10 @@ public class DeckOfCards {
     }
 
     private void generateAllPossibleCards(){
-        // TODO : Generate permutations
-        // TODO : Generate cards from permutations
+        CardGenerator cardGenerator = new CardGenerator();
+        deck=cardGenerator.getGeneratedCards();
     }
+
     // Method to check if the deck is empty
     public boolean isEmpty() {
         return deck.isEmpty();

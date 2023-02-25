@@ -7,8 +7,8 @@ public class Card {
     public static final int NUMBER_OF_PODIUMS = 2;
 
     public Card(Podium red, Podium blue) {
-        this.red = red;
-        this.blue = blue;
+        this.red = new Podium(red);
+        this.blue = new Podium(blue);
     }
 
     public Card(Card other) {
