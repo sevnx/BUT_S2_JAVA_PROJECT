@@ -1,7 +1,12 @@
 /**
- * @brief Class representing the game.
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Game.java
+ * Class representing the game.
  */
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -36,11 +41,11 @@ public class Game {
 
     public void turn(){
         setupStartOfTurn();
+        System.out.println(this);
+        displaySupportedCommands();
         while (!hasEveryPlayerLostCurrentTurn() || !currentTurnSituationFound){
-            System.out.println(this);
-            displaySupportedCommands();
-            askForCombination();
-            changeGoalSituationToCurrentSituation();
+            PairOfStrings playerInput = getCombination();
+            verifyCombinationInput(playerInput.getFirst(), playerInput.getSecond());
         }
     }
 
@@ -97,19 +102,14 @@ public class Game {
         players.sort(Comparator.comparing(Player::getScore).thenComparing(Player::getNickname));
     }
 
-    private void checkPlayer(String playerNickname){
-        if (!doesPlayerExist(playerNickname))
-            throw new IllegalArgumentException("Player does not exist");
-        if (!canPlayerPlay(playerNickname))
-            throw new IllegalArgumentException("Player cannot play");
-    }
-
     private boolean canPlayerPlay(String playerNickname){
+        if (!doesPlayerExist(playerNickname))
+            return false;
         for (Player p : players){
             if (p.getNickname().equals(playerNickname))
                 return !p.isCurrentTurnLost();
         }
-        throw new IllegalStateException("Player does not exist");
+        return false;
     }
 
     private boolean doesPlayerExist(String playerNickname){
@@ -120,27 +120,50 @@ public class Game {
         return false;
     }
 
-    private void checkCombination(String playerNickname, String combination){
-        checkPlayer(playerNickname);
-        assert(combination.length()%Card.COMMAND_SIZE == 0);
+    private Player getPlayerByNickname(String playerNickname){
+        for (Player p : players){
+            if (p.getNickname().equals(playerNickname))
+                return p;
+        }
+        return null;
+    }
+
+    private boolean verifyCombinationInput(String playerNickname, String combination){
+        if (!doesPlayerExist(playerNickname)) {
+            CombinationInputState.displayCombinationInputState(CombinationInputState.NON_EXISTENT_PLAYER);
+            return false;
+        }
+        else if (!canPlayerPlay(playerNickname)){
+            CombinationInputState.displayCombinationInputState(CombinationInputState.CANNOT_PLAY);
+            return false;
+        }
+        else if (!checkCombination(playerNickname, combination)){
+            CombinationInputState.displayCombinationInputState(CombinationInputState.INVALID_INPUT);
+            getPlayerByNickname(playerNickname).loseTurn();
+            return false;
+        }
+        else {
+            currentTurnSituationFound=true;
+            getPlayerByNickname(playerNickname).incrementScore();
+            return true;
+        }
+    }
+
+    private boolean checkCombination(String playerNickname, String combination){
+        if (combination.length()%Card.COMMAND_SIZE != 0)
+            return false;
         Card copyOfCurrentSituation = new Card(currentSituation);
             for (int i=0;i<combination.length()/Card.COMMAND_SIZE;i++){
                 String subCommand=getSubCommand(combination,i);
                 copyOfCurrentSituation.executeCommand(subCommand);
         }
-        if (copyOfCurrentSituation.equals(goalSituation)){
-            currentTurnSituationFound=true;
-            for (Player p : players){
-                if (p.getNickname().equals(playerNickname))
-                    p.incrementScore();
-            }
-        }
+        return copyOfCurrentSituation.equals(goalSituation);
     }
 
-    private void askForCombination() {
+    private PairOfStrings  getCombination(){
         String player = playerInputScanner.next();
         String combination = playerInputScanner.next();
-        checkCombination(player, combination);
+        return new PairOfStrings(player, combination);
     }
 
     private void displaySupportedCommands(){
@@ -149,26 +172,23 @@ public class Game {
         System.out.println("SO : BLEU <-> ROUGE");
     }
 
-    public String toString(){
-        return getRow(Podium.TOP_ROW) +
-                System.lineSeparator() +
-                getRow(Podium.MIDDLE_ROW) +
-                System.lineSeparator() +
-                getRow(Podium.BOTTOM_ROW) +
-                System.lineSeparator() +
-                "----\t----\t==>\t\t----\t----" +
-                System.lineSeparator() +
-                "BLEU\tROUGE\t\t\tBLEU\tROUGE" +
-                System.lineSeparator() +
-                "--------------------------------------------" +
-                System.lineSeparator();
+    @Override
+    public String toString() { // TODO: help
+        return getRow(Podium.TOP_ROW) + System.lineSeparator() +
+                getRow(Podium.MIDDLE_ROW) + System.lineSeparator() +
+                getRow(Podium.BOTTOM_ROW) + System.lineSeparator() +
+                "--------   --------   ==>   --------   --------" + System.lineSeparator() +
+                "  BLEU       ROUGE             BLEU       ROUGE  " + System.lineSeparator() +
+                "-------------------------------------------------" + System.lineSeparator();
     }
 
-    private String getRow(int index){
-        return currentSituation.getBlue().getAnimalStringByIndex(index)+"\t"
-                + currentSituation.getRed().getAnimalStringByIndex(index)+"\t\t"
-                + goalSituation.getBlue().getAnimalStringByIndex(index)+"\t"
-                + goalSituation.getRed().getAnimalStringByIndex(index);
+    private String getRow(int index) { // TODO: help
+        return String.format("%-10s%-10s\t\t%-10s%-10s",
+                currentSituation.getBlue().getAnimalStringByIndex(index),
+                currentSituation.getRed().getAnimalStringByIndex(index),
+                goalSituation.getBlue().getAnimalStringByIndex(index),
+                goalSituation.getRed().getAnimalStringByIndex(index)
+        );
     }
 
     private String getSubCommand(String command, int subCommandIndex){

@@ -1,3 +1,9 @@
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file AnimalPermutationGenerator.java
+ * Class generating all possible permutations of animals
+ */
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -5,8 +11,8 @@ import static java.util.Collections.swap;
 
 public class AnimalPermutationGenerator {
 
-    private ArrayList<ArrayList<Animal>> permutations;
-    private ArrayList<Animal> values;
+    private final ArrayList<ArrayList<Animal>> permutations;
+    private final ArrayList<Animal> values;
 
     public AnimalPermutationGenerator(){
         permutations = new ArrayList<>();

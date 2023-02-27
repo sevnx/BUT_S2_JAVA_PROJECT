@@ -1,3 +1,9 @@
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Animal.java
+ * Enumeration of animals
+ */
+
 public enum Animal {
     LION, ELEPHANT, BEAR;
     public static final int NUMBER_OF_ANIMALS = Animal.values().length;
@@ -13,5 +19,12 @@ public enum Animal {
             default:
                 return "Unknown";
         }
+    }
+    public static int getMaxAnimalLength(){
+        int max=0;
+        for (Animal animal:Animal.values())
+            if (animal.toString().length()>max)
+                max=animal.toString().length();
+        return max;
     }
 }

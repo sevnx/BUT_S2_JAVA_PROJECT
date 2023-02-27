@@ -3,6 +3,7 @@
  * @file Main.java
  * Main class for the game
  */
+
 public class Main {
     public static void main(String[] args) {
         Game game = new Game(args);

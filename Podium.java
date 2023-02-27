@@ -1,4 +1,11 @@
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Podium.java
+ * Class representing a podium
+ */
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Podium {
     private final ArrayList<Animal> animals; // The pile of animals
@@ -26,18 +33,22 @@ public class Podium {
         animals.remove(0);
     }
 
-    public String getAnimalStringByIndex(int index){
-        if (index<0 || index>=animals.size())
-            return "\t";
-        return animals.get(index).toString();
-    }
-
     public Animal getTop() {
         return animals.get(animals.size()-1);
     }
 
     public Animal getBottom() {
         return animals.get(0);
+    }
+
+    public String getAnimalStringByIndex(int index){
+        if (index<0 || index>=animals.size())
+            return "\t";
+        return animals.get(index).toString();
+    }
+
+    public boolean isEmpty(){
+        return animals.isEmpty();
     }
 
     @Override

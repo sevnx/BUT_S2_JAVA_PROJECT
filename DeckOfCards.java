@@ -1,3 +1,9 @@
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file DeckOfCards.java
+ * Class representing a deck of cards
+ */
+
 import java.util.*;
 
 public class DeckOfCards {

@@ -1,3 +1,9 @@
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Card.java
+ * Class representing a card
+ */
+
 import java.util.Objects;
 
 public class Card {
@@ -16,6 +22,34 @@ public class Card {
         this.blue = new Podium(other.blue);
     }
 
+    public Podium getRed() {
+        return red;
+    }
+
+    public Podium getBlue() {
+        return blue;
+    }
+
+    public boolean canKI(){
+        return !blue.isEmpty();
+    }
+
+    public boolean canLO(){
+        return !red.isEmpty();
+    }
+
+    public boolean canNI(){
+        return !red.isEmpty();
+    }
+
+    public boolean canMA(){
+        return !red.isEmpty();
+    }
+
+    public boolean canSO(){
+        return !red.isEmpty() && !blue.isEmpty();
+    }
+
     private void commandKI(){
         red.addAtTop(blue.getTop());
         blue.removeAtTop();
@@ -27,21 +61,13 @@ public class Card {
     }
 
     private void commandNI(){
-        blue.addAtTop(red.getBottom());
-        red.removeAtBottom();
+        blue.addAtTop(blue.getBottom());
+        blue.removeAtBottom();
     }
 
     private void commandMA(){
         red.addAtTop(red.getBottom());
         red.removeAtBottom();
-    }
-
-    public Podium getRed() {
-        return red;
-    }
-
-    public Podium getBlue() {
-        return blue;
     }
 
     private void commandSO(){
@@ -55,7 +81,7 @@ public class Card {
 
     public void executeCommand(String command) {
         if (command.length() != 2)
-            throw new UnsupportedOperationException("Command size must be 2.");
+            throw new RuntimeException("Command size must be 2");
         switch (command){
             case "KI":
                 commandKI();
@@ -73,16 +99,8 @@ public class Card {
                 commandMA();
                 break;
             default:
-                throw new IllegalStateException("Unknown command :c");
+                break;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Card{" +
-                "red=" + red +
-                ", blue=" + blue +
-                '}';
     }
 
     @Override

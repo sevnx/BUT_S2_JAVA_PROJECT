@@ -1,8 +1,14 @@
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file CardGenerator.java
+ * Class generating all possible cards
+ */
+
 import java.util.ArrayList;
 
 public class CardGenerator {
-    private ArrayList<ArrayList<Animal>> basePermutations;
-    private ArrayList<Card> generatedCards;
+    private final ArrayList<ArrayList<Animal>> basePermutations;
+    private final ArrayList<Card> generatedCards;
 
     public CardGenerator(){
         basePermutations = new AnimalPermutationGenerator().getPermutations();
