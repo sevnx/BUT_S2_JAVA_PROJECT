@@ -36,6 +36,14 @@ public class Card {
         red.removeAtBottom();
     }
 
+    public Podium getRed() {
+        return red;
+    }
+
+    public Podium getBlue() {
+        return blue;
+    }
+
     private void commandSO(){
         Animal redTop=red.getTop();
         Animal blueTop=blue.getTop();

@@ -1,19 +1,13 @@
 import java.util.ArrayList;
 
 public class Podium {
-    private ArrayList<Animal> animals; // The pile of animals
-
-    public Podium() {
-        this.animals = new ArrayList<>();
-    }
-
-    public Podium(Animal animal){
-        this();
-        animals.add(animal);
-    }
+    private final ArrayList<Animal> animals; // The pile of animals
+    public static int TOP_ROW = 2;
+    public static int MIDDLE_ROW = 1;
+    public static int BOTTOM_ROW = 0;
 
     public Podium(ArrayList<Animal> animals){
-        this.animals = animals;
+        this.animals = new ArrayList<>(animals);
     }
 
     public Podium(Podium other){
@@ -30,6 +24,12 @@ public class Podium {
 
     public void removeAtBottom() {
         animals.remove(0);
+    }
+
+    public String getAnimalStringByIndex(int index){
+        if (index<0 || index>=animals.size())
+            return "\t";
+        return animals.get(index).toString();
     }
 
     public Animal getTop() {
