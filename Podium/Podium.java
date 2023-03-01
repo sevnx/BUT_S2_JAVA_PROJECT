@@ -1,7 +1,9 @@
-package podium; /**
+package podium;
+
+/**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Podium.Podium.java
- * Class representing a podium
+ * @brief Class representing a podium.
  */
 
 import java.util.ArrayList;
