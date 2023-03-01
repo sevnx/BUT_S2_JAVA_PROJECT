@@ -3,7 +3,7 @@ package cards;
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Cards.CardTest.java
- * @brief Class tests Card's functionality using JUnit.
+ * @brief Unit tests for class "Card" with various methods.
  */
 
 import podium.Animal;
