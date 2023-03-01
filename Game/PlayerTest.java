@@ -3,7 +3,7 @@ package game;
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Game.PlayerTest.java
- * @brief Test class for Game.Player.java.
+ * @brief Unit tests for class "Player" with various methods.
  */
 
 import org.junit.Test;
