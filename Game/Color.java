@@ -1,8 +1,8 @@
 package game;
 
 /**
- * @file Game.Color.java
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Game.Color.java
  * @brief Class that takes care of the colors.
  */
 
