@@ -3,7 +3,7 @@ import game.Game;
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Main.java
- * Main class for the game
+ * @brief Main class for the game.
  */
 
 public class Main {
