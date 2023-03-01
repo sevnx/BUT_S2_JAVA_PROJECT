@@ -1,5 +1,11 @@
 package podium;
 
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Podium.PodiumTest.java
+ * @brief Unit tests for class "Podium" with various methods.
+ */
+
 import org.junit.Test;
 
 import java.util.ArrayList;
