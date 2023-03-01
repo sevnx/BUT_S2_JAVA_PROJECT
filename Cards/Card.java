@@ -1,7 +1,9 @@
-package cards; /**
+package cards;
+
+/**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Cards.Card.java
- * Class representing a card
+ * @brief Class representing a card.
  */
 
 import podium.Animal;
