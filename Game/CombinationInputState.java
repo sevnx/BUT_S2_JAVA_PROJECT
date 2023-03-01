@@ -1,5 +1,11 @@
 package game;
 
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Game.CombinationInputState.java
+ * Class enumerates possible combination input states.
+ */
+
 public enum CombinationInputState {
     NON_EXISTENT_PLAYER, INVALID_INPUT, CANNOT_PLAY;
 
