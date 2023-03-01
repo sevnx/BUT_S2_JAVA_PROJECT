@@ -3,7 +3,7 @@ package podium;
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Podium.Animal.java
- * Enumeration of animals
+ * @brief Enumeration of animals.
  */
 
 public enum Animal {
