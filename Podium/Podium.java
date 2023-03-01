@@ -8,6 +8,7 @@ package podium;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import color.Color;
 
 public class Podium {
 

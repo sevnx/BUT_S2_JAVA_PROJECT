@@ -7,6 +7,7 @@ package game;
  */
 
 import cards.DeckOfCards;
+import color.Color;
 import podium.Podium;
 import cards.Card;
 
@@ -14,7 +15,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 public class Game {
+
     private static final int MIN_PLAYERS = 2;
     private final ArrayList<Player> players;
     private boolean currentTurnSituationFound;
@@ -23,7 +27,7 @@ public class Game {
     private final Scanner playerInputScanner;
     private final DeckOfCards deck;
     public Game(String[] nicknames) {
-        assert(nicknames.length >= MIN_PLAYERS); // TODO: throw exception
+        verifyNicknames(nicknames);
         players = new ArrayList<>(nicknames.length);
         for (String nickname : nicknames)
             players.add(new Player(nickname));
@@ -31,6 +35,29 @@ public class Game {
         currentSituation=deck.pickRandomCard();
         currentTurnSituationFound=false;
         playerInputScanner = new Scanner(System.in);
+    }
+
+    private void verifyNicknames(String[] nicknames){
+        if (nicknames.length < MIN_PLAYERS){
+            System.out.println(Color.coloredString(Color.ANSI.RED,
+                    "Pour jouer une partie, il faut " + MIN_PLAYERS + " joueurs minimum."));
+            exit(1);
+        }
+        if (hasDoubleNicknames(nicknames)) {
+            System.err.println(Color.coloredString(Color.ANSI.RED,
+                    "Deux joueurs ne peuvent pas avoir le même nom."));
+            exit(1);
+        }
+    }
+
+    private boolean hasDoubleNicknames(String[] nicknames){
+        for (int i = 0; i < nicknames.length; i++) {
+            for (int j = i+1; j < nicknames.length; j++) {
+                if (nicknames[i].equals(nicknames[j]))
+                    return true;
+            }
+        }
+        return false;
     }
 
     public void play() {
@@ -45,7 +72,7 @@ public class Game {
         setupStartOfTurn();
         System.out.println(this);
         displaySupportedCommands();
-        while (!hasEveryPlayerLostCurrentTurn() && !currentTurnSituationFound){
+        while (!hasAllButOnePlayerLostCurrentTurn() && !currentTurnSituationFound){
             Pair<String> playerInput = getCombination();
             verifyCombinationInput(playerInput.getFirst(), playerInput.getSecond());
         }
@@ -79,12 +106,27 @@ public class Game {
             p.resetCurrentTurnLost();
     }
 
-    private boolean hasEveryPlayerLostCurrentTurn(){
+    private boolean hasAllButOnePlayerLostCurrentTurn(){
+        Player lastOneStanding = null; // used to store player who has not lost, to increment his score if he is the only one
+        int playersWhoHaveNotLost=0;
         for (Player p : players){
-            if (!p.isCurrentTurnLost())
-                return false;
+            if (!p.isCurrentTurnLost()) {
+                playersWhoHaveNotLost++;
+                lastOneStanding = p;
+            }
         }
-        return true;
+        if (playersWhoHaveNotLost==1){
+            lastOneStanding.incrementScore();
+            displayAllButOnePlayerLostCurrentTurn(lastOneStanding.getNickname());
+            return true;
+        }
+        return false;
+    }
+
+    private void displayAllButOnePlayerLostCurrentTurn(String playerNickname){
+        System.out.print(Color.coloredString(Color.ANSI.GREEN, "Tous les joueurs ont perdu sauf "));
+        System.out.print(Color.coloredString(Color.ANSI.YELLOW, playerNickname));
+        System.out.println(Color.coloredString(Color.ANSI.GREEN," qui remporte le tour. Félicitations!"));
     }
 
     public void endOfGame(){
@@ -136,7 +178,7 @@ public class Game {
             CombinationInputState.displayCombinationInputState(CombinationInputState.NON_EXISTENT_PLAYER);
         else if (!canPlayerPlay(playerNickname))
             CombinationInputState.displayCombinationInputState(CombinationInputState.CANNOT_PLAY);
-        else if (!checkCombination(playerNickname, combination)){
+        else if (!checkCombination(combination)){
             CombinationInputState.displayCombinationInputState(CombinationInputState.INVALID_INPUT);
             getPlayerByNickname(playerNickname).loseTurn();
         }
@@ -146,15 +188,13 @@ public class Game {
         }
     }
 
-    private boolean checkCombination(String playerNickname, String combination){
+    private boolean checkCombination(String combination){
         try {
             if (combination.length() % Card.COMMAND_SIZE != 0)
                 return false;
             Card copyOfCurrentSituation = new Card(currentSituation);
-            for (int i = 0; i < combination.length() / Card.COMMAND_SIZE; i++) {
-                String subCommand = getSubCommand(combination, i);
+            for (String subCommand: combination.split("(?<=\\G.{2})"))
                 copyOfCurrentSituation.executeCommand(subCommand);
-            }
             return copyOfCurrentSituation.equals(goalSituation);
         }
         catch (Exception e){
@@ -175,26 +215,30 @@ public class Game {
     }
 
     @Override
-    public String toString() { // TODO: help
+    public String toString() {
         return getRow(Podium.TOP_ROW) + System.lineSeparator() +
                 getRow(Podium.MIDDLE_ROW) + System.lineSeparator() +
                 getRow(Podium.BOTTOM_ROW) + System.lineSeparator() +
                 "--------   --------   ==>   --------   --------" + System.lineSeparator() +
-                "  BLEU       ROUGE             BLEU       ROUGE  " + System.lineSeparator() +
+                "  "
+                +Color.coloredString(Color.ANSI.BLUE, "BLEU")
+                +"       "
+                +Color.coloredString(Color.ANSI.RED, "ROUGE")
+                +"            "
+                +Color.coloredString(Color.ANSI.BLUE, "BLEU")
+                +"       "
+                +Color.coloredString(Color.ANSI.RED, "ROUGE")
+                +"  " + System.lineSeparator() +
                 "-------------------------------------------------" + System.lineSeparator();
     }
 
-    private String getRow(int index) { // TODO: help
-        return String.format("%-10s%-10s\t\t%-10s%-10s",
+
+    private String getRow(int index) {
+        return String.format("%-10s%-10s      %-10s%-10s",
                 currentSituation.getBlue().getAnimalStringByIndex(index),
                 currentSituation.getRed().getAnimalStringByIndex(index),
                 goalSituation.getBlue().getAnimalStringByIndex(index),
                 goalSituation.getRed().getAnimalStringByIndex(index)
         );
-    }
-
-    private String getSubCommand(String command, int subCommandIndex){
-        int commandStart=subCommandIndex* Card.COMMAND_SIZE;
-        return command.substring(commandStart,commandStart+ Card.COMMAND_SIZE);
     }
 }
