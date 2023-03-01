@@ -3,7 +3,7 @@ package game;
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Game.Game.java
- * Class representing the game.
+ * @brief Class representing the game.
  */
 
 import cards.DeckOfCards;
