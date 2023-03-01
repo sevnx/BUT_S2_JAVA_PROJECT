@@ -1,5 +1,11 @@
 package cards;
 
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Cards.CardTest.java
+ * @brief: Class tests Card's functionality using JUnit.
+ */
+
 import podium.Animal;
 import podium.Podium;
 import org.junit.Test;
