@@ -1,11 +1,11 @@
 package game;
 
 /**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Game.Player.java
  * @brief Class representing a player in the game.
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @version 1.0
  */
+
 public class Player {
     private final String nickname;
     private int score;
