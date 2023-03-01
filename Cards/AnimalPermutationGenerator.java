@@ -1,7 +1,9 @@
-package cards; /**
+package cards;
+
+/**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Cards.AnimalPermutationGenerator.java
- * Class generating all possible permutations of animals
+ * @brief Class generating all possible permutations of animals.
  */
 
 import podium.Animal;
