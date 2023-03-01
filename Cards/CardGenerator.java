@@ -1,7 +1,9 @@
-package cards; /**
+package cards;
+
+/**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Cards.CardGenerator.java
- * Class generating all possible cards
+ * @brief Class generating all possible cards.
  */
 
 import podium.Animal;
