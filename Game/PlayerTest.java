@@ -1,7 +1,9 @@
-package game; /**
- * @file Game.PlayerTest.java
- * @brief Test class for Game.Player.java
+package game;
+
+/**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Game.PlayerTest.java
+ * @brief Test class for Game.Player.java.
  */
 
 import org.junit.Test;
