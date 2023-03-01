@@ -1,7 +1,9 @@
-package cards; /**
+package cards;
+
+/**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Cards.DeckOfCards.java
- * Class representing a deck of cards
+ * @brief Class representing a deck of cards.
  */
 
 import java.util.*;
