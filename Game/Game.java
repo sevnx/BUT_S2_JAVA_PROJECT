@@ -1,12 +1,14 @@
+package game;
+
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.java
+ * @file Game.Game.java
  * Class representing the game.
  */
 
-
-
-
+import cards.DeckOfCards;
+import podium.Podium;
+import cards.Card;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -43,13 +45,14 @@ public class Game {
         setupStartOfTurn();
         System.out.println(this);
         displaySupportedCommands();
-        while (!hasEveryPlayerLostCurrentTurn() || !currentTurnSituationFound){
-            PairOfStrings playerInput = getCombination();
+        while (!hasEveryPlayerLostCurrentTurn() && !currentTurnSituationFound){
+            Pair<String> playerInput = getCombination();
             verifyCombinationInput(playerInput.getFirst(), playerInput.getSecond());
         }
+        changeCurrentSituationToGoalSituation();
     }
 
-    private void changeGoalSituationToCurrentSituation(){
+    private void changeCurrentSituationToGoalSituation(){
         currentSituation=goalSituation;
     }
 
@@ -91,7 +94,7 @@ public class Game {
     }
 
     public void endOfGameDisplay(){
-        int rank=0;
+        int rank=1;
         for (Player p : players) {
             System.out.print((rank++) + ". ");
             System.out.println(p);
@@ -128,42 +131,41 @@ public class Game {
         return null;
     }
 
-    private boolean verifyCombinationInput(String playerNickname, String combination){
-        if (!doesPlayerExist(playerNickname)) {
+    private void verifyCombinationInput(String playerNickname, String combination){
+        if (!doesPlayerExist(playerNickname))
             CombinationInputState.displayCombinationInputState(CombinationInputState.NON_EXISTENT_PLAYER);
-            return false;
-        }
-        else if (!canPlayerPlay(playerNickname)){
+        else if (!canPlayerPlay(playerNickname))
             CombinationInputState.displayCombinationInputState(CombinationInputState.CANNOT_PLAY);
-            return false;
-        }
         else if (!checkCombination(playerNickname, combination)){
             CombinationInputState.displayCombinationInputState(CombinationInputState.INVALID_INPUT);
             getPlayerByNickname(playerNickname).loseTurn();
-            return false;
         }
         else {
             currentTurnSituationFound=true;
             getPlayerByNickname(playerNickname).incrementScore();
-            return true;
         }
     }
 
     private boolean checkCombination(String playerNickname, String combination){
-        if (combination.length()%Card.COMMAND_SIZE != 0)
-            return false;
-        Card copyOfCurrentSituation = new Card(currentSituation);
-            for (int i=0;i<combination.length()/Card.COMMAND_SIZE;i++){
-                String subCommand=getSubCommand(combination,i);
+        try {
+            if (combination.length() % Card.COMMAND_SIZE != 0)
+                return false;
+            Card copyOfCurrentSituation = new Card(currentSituation);
+            for (int i = 0; i < combination.length() / Card.COMMAND_SIZE; i++) {
+                String subCommand = getSubCommand(combination, i);
                 copyOfCurrentSituation.executeCommand(subCommand);
+            }
+            return copyOfCurrentSituation.equals(goalSituation);
         }
-        return copyOfCurrentSituation.equals(goalSituation);
+        catch (Exception e){
+            return false;
+        }
     }
 
-    private PairOfStrings  getCombination(){
+    private Pair<String> getCombination(){
         String player = playerInputScanner.next();
         String combination = playerInputScanner.next();
-        return new PairOfStrings(player, combination);
+        return new Pair<>(player, combination);
     }
 
     private void displaySupportedCommands(){
@@ -192,7 +194,7 @@ public class Game {
     }
 
     private String getSubCommand(String command, int subCommandIndex){
-        int commandStart=subCommandIndex*Card.COMMAND_SIZE;
-        return command.substring(commandStart,commandStart+Card.COMMAND_SIZE);
+        int commandStart=subCommandIndex* Card.COMMAND_SIZE;
+        return command.substring(commandStart,commandStart+ Card.COMMAND_SIZE);
     }
 }

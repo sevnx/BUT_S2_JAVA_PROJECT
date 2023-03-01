@@ -1,3 +1,5 @@
+import game.Game;
+
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Main.java

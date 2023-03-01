@@ -1,6 +1,6 @@
-/**
- * @file PlayerTest.java
- * @brief Test class for Player.java
+package game; /**
+ * @file Game.PlayerTest.java
+ * @brief Test class for Game.Player.java
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  */
 

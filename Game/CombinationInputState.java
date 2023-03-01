@@ -1,3 +1,5 @@
+package game;
+
 public enum CombinationInputState {
     NON_EXISTENT_PLAYER, INVALID_INPUT, CANNOT_PLAY;
 

@@ -1,8 +1,10 @@
-/**
+package cards; /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file AnimalPermutationGenerator.java
+ * @file Cards.AnimalPermutationGenerator.java
  * Class generating all possible permutations of animals
  */
+
+import podium.Animal;
 
 import java.util.ArrayList;
 import java.util.Arrays;

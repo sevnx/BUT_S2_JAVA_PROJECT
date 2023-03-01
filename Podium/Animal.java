@@ -1,6 +1,8 @@
+package podium;
+
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Animal.java
+ * @file Podium.Animal.java
  * Enumeration of animals
  */
 

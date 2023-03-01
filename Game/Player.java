@@ -1,5 +1,7 @@
+package game;
+
 /**
- * @file Player.java
+ * @file Game.Player.java
  * @brief Class representing a player in the game.
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @version 1.0
