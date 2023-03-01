@@ -1,9 +1,9 @@
 package game;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Game.Color.java
- * Class that takes care of the colors.
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @brief Class that takes care of the colors.
  */
 
 public class Color {
