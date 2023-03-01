@@ -3,7 +3,7 @@ package game;
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Game.CombinationInputState.java
- * Class enumerates possible combination input states.
+ * @brief Class enumerates possible combination input states.
  */
 
 public enum CombinationInputState {
