@@ -10,9 +10,10 @@ import podium.Animal;
 import podium.Podium;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CardGenerator {
-    private final ArrayList<ArrayList<Animal>> basePermutations;
+    private final List<ArrayList<Animal>> basePermutations;
     private final ArrayList<Card> generatedCards;
 
     public CardGenerator(){
@@ -35,7 +36,7 @@ public class CardGenerator {
         }
     }
 
-    public ArrayList<Card> getGeneratedCards() {
+    public List<Card> getGeneratedCards() {
         return generatedCards;
     }
 }

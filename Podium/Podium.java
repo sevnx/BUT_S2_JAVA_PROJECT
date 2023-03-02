@@ -7,21 +7,25 @@ package podium;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import color.Color;
 
 public class Podium {
 
     private final ArrayList<Animal> animals; // The pile of animals
-    public static int TOP_ROW = 2;
-    public static int MIDDLE_ROW = 1;
-    public static int BOTTOM_ROW = 0;
+    public static final int TOP_ROW = 2;
+    public static final int MIDDLE_ROW = 1;
+    public static final int BOTTOM_ROW = 0;
+
+    public int getSize(){
+        return animals.size();
+    }
 
     public Podium(){
         this.animals = new ArrayList<>();
     }
 
-    public Podium(ArrayList<Animal> animals){
+    public Podium(List<Animal> animals){
         this.animals = new ArrayList<>(animals);
     }
 
@@ -51,7 +55,7 @@ public class Podium {
 
     public String getAnimalStringByIndex(int index){
         if (index<0 || index>=animals.size())
-            return "\t";
+            return "";
         return animals.get(index).toString();
     }
 

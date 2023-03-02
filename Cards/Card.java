@@ -63,6 +63,26 @@ public class Card {
         red.addAtTop(blueTop);
     }
 
+    public boolean canKI(){
+        return !blue.isEmpty();
+    }
+
+    public boolean canLO(){
+        return !red.isEmpty();
+    }
+
+    public boolean canNI(){
+        return !blue.isEmpty() && blue.getSize()>1;
+    }
+
+    public boolean canMA(){
+        return !red.isEmpty() && red.getSize()>1;
+    }
+
+    public boolean canSO(){
+        return !red.isEmpty() && !blue.isEmpty();
+    }
+
     public void executeCommand(String command) {
         if (command.length() != 2)
             throw new RuntimeException("Command size must be 2");

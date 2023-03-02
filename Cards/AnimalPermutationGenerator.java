@@ -10,6 +10,7 @@ import podium.Animal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static java.util.Collections.swap;
 
@@ -39,7 +40,7 @@ public class AnimalPermutationGenerator {
         }
     }
 
-    public ArrayList<ArrayList<Animal>> getPermutations() {
+    public List<ArrayList<Animal>> getPermutations() {
         return permutations;
     }
 

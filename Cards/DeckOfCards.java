@@ -20,7 +20,7 @@ public class DeckOfCards {
 
     private void generateAllPossibleCards(){
         CardGenerator cardGenerator = new CardGenerator();
-        deck=cardGenerator.getGeneratedCards();
+        deck=(ArrayList<Card>)cardGenerator.getGeneratedCards();
     }
 
     // Method to check if the deck is empty

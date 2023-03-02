@@ -48,7 +48,7 @@ public class CardTest {
         blue.add(Animal.ELEPHANT);
         red.add(Animal.LION);
         Card card1 = new Card(new Podium(red), new Podium(blue));
-        Card card2 = card1;
+        Card card2 = new Card(card1);
         assertEquals(card1, card2);
     }
 

@@ -8,7 +8,6 @@ package game;
 
 import cards.DeckOfCards;
 import color.Color;
-import podium.Podium;
 import cards.Card;
 
 import java.util.ArrayList;
@@ -156,7 +155,7 @@ public class Game {
     }
 
     private boolean canPlayerPlay(String playerNickname){
-        if (!doesPlayerExist(playerNickname))
+        if (isPlayerNonExistent(playerNickname))
             return false;
         for (Player p : players){
             if (p.getNickname().equals(playerNickname))
@@ -165,12 +164,12 @@ public class Game {
         return false;
     }
 
-    private boolean doesPlayerExist(String playerNickname){
+    private boolean isPlayerNonExistent(String playerNickname){
         for (Player p : players){
             if (p.getNickname().equals(playerNickname))
-                return true;
+                return false;
         }
-        return false;
+        return true;
     }
 
     private Player getPlayerByNickname(String playerNickname){
@@ -182,7 +181,8 @@ public class Game {
     }
 
     private String findCombination(){
-        return null;
+        CombinationFinder finder = new CombinationFinder(currentSituation, goalSituation);
+        return finder.findCombination();
     }
 
     private void displayFoundCombination(String combination){
@@ -190,9 +190,11 @@ public class Game {
     }
 
     private void verifyCombinationInput(String input1, String input2){
-        if (isFirstInputSecretString(input1))
+        if (isFirstInputSecretString(input1)) {
             displayFoundCombination(findCombination());
-        else if (!doesPlayerExist(input1))
+            currentTurnSituationFound=true;
+        }
+        else if (isPlayerNonExistent(input1))
             CombinationInputState.displayCombinationInputState(CombinationInputState.NON_EXISTENT_PLAYER);
         else if (!canPlayerPlay(input1))
             CombinationInputState.displayCombinationInputState(CombinationInputState.CANNOT_PLAY);
