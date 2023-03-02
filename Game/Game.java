@@ -13,12 +13,13 @@ import cards.Card;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
 
 public class Game {
-
+    private static final String SECRET_STRING = "%^&*</=#@";
     private static final int MIN_PLAYERS = 2;
     private final ArrayList<Player> players;
     private boolean currentTurnSituationFound;
@@ -71,7 +72,6 @@ public class Game {
     public void turn(){
         setupStartOfTurn();
         System.out.println(this);
-        displaySupportedCommands();
         while (!hasAllButOnePlayerLostCurrentTurn() && !currentTurnSituationFound){
             Pair<String> playerInput = getCombination();
             verifyCombinationInput(playerInput.getFirst(), playerInput.getSecond());
@@ -143,6 +143,14 @@ public class Game {
         }
     }
 
+    public Card getCurrentSituation(){
+        return currentSituation;
+    }
+
+    public Card getGoalSituation(){
+        return goalSituation;
+    }
+
     private void sortPlayersByScoreThenByName(){
         players.sort(Comparator.comparing(Player::getScore).thenComparing(Player::getNickname));
     }
@@ -173,19 +181,34 @@ public class Game {
         return null;
     }
 
-    private void verifyCombinationInput(String playerNickname, String combination){
-        if (!doesPlayerExist(playerNickname))
+    private String findCombination(){
+        return null;
+    }
+
+    private void displayFoundCombination(String combination){
+        System.out.println(Color.coloredString(Color.ANSI.GREEN, "Combinaison trouvée: " + combination));
+    }
+
+    private void verifyCombinationInput(String input1, String input2){
+        if (isFirstInputSecretString(input1))
+            displayFoundCombination(findCombination());
+        else if (!doesPlayerExist(input1))
             CombinationInputState.displayCombinationInputState(CombinationInputState.NON_EXISTENT_PLAYER);
-        else if (!canPlayerPlay(playerNickname))
+        else if (!canPlayerPlay(input1))
             CombinationInputState.displayCombinationInputState(CombinationInputState.CANNOT_PLAY);
-        else if (!checkCombination(combination)){
+        else if (!checkCombination(input2)){
             CombinationInputState.displayCombinationInputState(CombinationInputState.INVALID_INPUT);
-            getPlayerByNickname(playerNickname).loseTurn();
+            Objects.requireNonNull(getPlayerByNickname(input1)).loseTurn();
         }
         else {
+            CombinationInputState.displayCombinationInputState(CombinationInputState.CORRECT_INPUT);
             currentTurnSituationFound=true;
-            getPlayerByNickname(playerNickname).incrementScore();
+            Objects.requireNonNull(getPlayerByNickname(input1)).incrementScore();
         }
+    }
+
+    private boolean isFirstInputSecretString(String input){
+        return input.equals(SECRET_STRING);
     }
 
     private boolean checkCombination(String combination){
@@ -203,42 +226,18 @@ public class Game {
     }
 
     private Pair<String> getCombination(){
-        String player = playerInputScanner.next();
-        String combination = playerInputScanner.next();
+        String enteredLine = playerInputScanner.nextLine();
+        Scanner input = new Scanner(enteredLine);
+        String player = input.next();
+        String combination = "";
+        if (input.hasNext())
+            combination = input.next();
         return new Pair<>(player, combination);
-    }
-
-    private void displaySupportedCommands(){
-        System.out.println("KI : BLEU --> ROUGE\t\tNI : BLEU ^");
-        System.out.println("LO : BLEU <-- ROUGE\t\tMA : ROUGE ^");
-        System.out.println("SO : BLEU <-> ROUGE");
     }
 
     @Override
     public String toString() {
-        return getRow(Podium.TOP_ROW) + System.lineSeparator() +
-                getRow(Podium.MIDDLE_ROW) + System.lineSeparator() +
-                getRow(Podium.BOTTOM_ROW) + System.lineSeparator() +
-                "--------   --------   ==>   --------   --------" + System.lineSeparator() +
-                "  "
-                +Color.coloredString(Color.ANSI.BLUE, "BLEU")
-                +"       "
-                +Color.coloredString(Color.ANSI.RED, "ROUGE")
-                +"            "
-                +Color.coloredString(Color.ANSI.BLUE, "BLEU")
-                +"       "
-                +Color.coloredString(Color.ANSI.RED, "ROUGE")
-                +"  " + System.lineSeparator() +
-                "-------------------------------------------------" + System.lineSeparator();
-    }
-
-
-    private String getRow(int index) {
-        return String.format("%-10s%-10s      %-10s%-10s",
-                currentSituation.getBlue().getAnimalStringByIndex(index),
-                currentSituation.getRed().getAnimalStringByIndex(index),
-                goalSituation.getBlue().getAnimalStringByIndex(index),
-                goalSituation.getRed().getAnimalStringByIndex(index)
-        );
+        GameDisplayBuilder builder = new GameDisplayBuilder(this);
+        return builder.getDisplay();
     }
 }

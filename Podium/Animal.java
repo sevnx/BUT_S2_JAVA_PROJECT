@@ -9,6 +9,7 @@ package podium;
 public enum Animal {
     LION, ELEPHANT, BEAR;
     public static final int NUMBER_OF_ANIMALS = Animal.values().length;
+
     @Override
     public String toString() {
         switch (this) {
@@ -19,14 +20,7 @@ public enum Animal {
             case BEAR:
                 return "OURS";
             default:
-                return "Unknown";
+                return "";
         }
-    }
-    public static int getMaxAnimalLength(){
-        int max=0;
-        for (Animal animal:Animal.values())
-            if (animal.toString().length()>max)
-                max=animal.toString().length();
-        return max;
     }
 }
