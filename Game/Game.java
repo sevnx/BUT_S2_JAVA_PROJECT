@@ -1,11 +1,5 @@
 package game;
 
-/**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.Game.java
- * @brief Class representing the game.
- */
-
 import cards.DeckOfCards;
 import color.Color;
 import cards.Card;
@@ -17,26 +11,65 @@ import java.util.Scanner;
 
 import static java.lang.System.exit;
 
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Game.Game.java
+ * @brief Class representing the game.
+ */
 public class Game {
+    /** Secret string to reveal the combination to get the goal situation (as requested by D.Poitrenaud) */
     private static final String SECRET_STRING = "%^&*</=#@";
+    /** Minimum number of players to play a game */
     private static final int MIN_PLAYERS = 2;
+    /** ArrayList to store the player */
     private final ArrayList<Player> players;
+    /** Boolean to know if the current turn situation has been found */
     private boolean currentTurnSituationFound;
-    private Card currentSituation;
+    /** Card representing the starting situation */
+    private Card startingSituation;
+    /** Card representing the goal situation */
     private Card goalSituation;
+    /** Scanner to get the player input */
     private final Scanner playerInputScanner;
+    /** Deck of cards, used to get situations */
     private final DeckOfCards deck;
+
+    /**
+     * Constructor of the class that creates a game with a given list of nicknames.
+     * @param nicknames List of nicknames of the players.
+     */
     public Game(String[] nicknames) {
         verifyNicknames(nicknames);
         players = new ArrayList<>(nicknames.length);
         for (String nickname : nicknames)
             players.add(new Player(nickname));
         deck = new DeckOfCards();
-        currentSituation=deck.pickRandomCard();
+        startingSituation =deck.pickRandomCard();
         currentTurnSituationFound=false;
         playerInputScanner = new Scanner(System.in);
     }
 
+    /**
+     * Getter for the starting situation.
+     * @return the starting situation.
+     */
+    public Card getStartingSituation(){
+        return startingSituation;
+    }
+
+    /**
+     * Getter for the goal situation.
+     * @return the goal situation.
+     */
+    public Card getGoalSituation(){
+        return goalSituation;
+    }
+
+    /**
+     * Utility function that verifies the nicknames given by the user.
+     * If there are less than 2 nicknames or there is duplicate names, the program exits.
+     * @param nicknames List of nicknames to verify.
+     */
     private void verifyNicknames(String[] nicknames){
         if (nicknames.length < MIN_PLAYERS){
             System.out.println(Color.coloredString(Color.ANSI.RED,
@@ -50,6 +83,11 @@ public class Game {
         }
     }
 
+    /**
+     * Utility function that checks if there are duplicate nicknames in a list of nicknames.
+     * @param nicknames List of nicknames to check.
+     * @return true if there are duplicate nicknames, false otherwise.
+     */
     private boolean hasDoubleNicknames(String[] nicknames){
         for (int i = 0; i < nicknames.length; i++) {
             for (int j = i+1; j < nicknames.length; j++) {
@@ -60,6 +98,11 @@ public class Game {
         return false;
     }
 
+    /**
+     * Plays a game of the "Crazy Circus" game.
+     * The game is played until the deck is empty.
+     * At the end of the game, the list of players and their scores is displayed in descending order.
+     */
     public void play() {
         pickStartOfGameSituation();
         while (!deck.isEmpty()){
@@ -68,43 +111,82 @@ public class Game {
         endOfGame();
     }
 
+    /**
+     * Plays out a turn of the game.
+     * At the start prints out the starting and goal situations.
+     * Each player can guess the command combination to get from the starting situation to the goal situation.
+     * The turn goes on until one player finds the combination, all but one player have lost the turn or if the
+     * secret command was called.
+     */
     public void turn(){
         setupStartOfTurn();
         System.out.println(this);
         while (!hasAllButOnePlayerLostCurrentTurn() && !currentTurnSituationFound){
-            Pair<String> playerInput = getCombination();
+            Pair<String> playerInput = getInputFromPlayer();
             verifyCombinationInput(playerInput.getFirst(), playerInput.getSecond());
         }
         changeCurrentSituationToGoalSituation();
     }
 
+    /**
+     * Changes the current situation to the goal situation.
+     * Happens at the end of a turn
+     * (by the rules at the end of a turn, the current situation becomes the goal situation).
+     */
     private void changeCurrentSituationToGoalSituation(){
-        currentSituation=goalSituation;
+        startingSituation = goalSituation;
     }
 
+    /**
+     * Picks the starting situation of the game (only called at the start of the game, because after
+     * that the current situation becomes the goal situation at the end of each turn).
+     */
     private void pickStartOfGameSituation(){
-        currentSituation=deck.pickRandomCard();
+        startingSituation = deck.pickRandomCard();
     }
 
+    /**
+     * Start of turn setup :
+     * - Resets the current turn status for every player (every player has not lost the turn at the start of a turn).
+     * - Resets the current situation found (the current situation has not been found at the start of a turn).
+     * - Picks the goal situation for the turn.
+     */
     private void setupStartOfTurn(){
         resetCurrentTurnStatusForEveryPlayer();
         resetCurrentSituationFound();
         pickTurnGoalSituation();
     }
 
+    /**
+     * Picks the goal situation for the turn, from the deck of cards, removing that card from the deck.
+     */
     private void pickTurnGoalSituation(){
-        goalSituation=deck.pickRandomCard();
+        goalSituation = deck.pickRandomCard();
     }
 
+    /**
+     * Resets the current situation found to false (used at the start of a turn).
+     * @see Game#setupStartOfTurn()
+     */
     private void resetCurrentSituationFound(){
-        currentTurnSituationFound=false;
+        currentTurnSituationFound = false;
     }
 
+    /**
+     * Resets the current turn status for every player (used at the start of a turn).
+     * @see Player#resetCurrentTurnLost()
+     * @see Game#setupStartOfTurn()
+     */
     private void resetCurrentTurnStatusForEveryPlayer(){
         for (Player p : players)
             p.resetCurrentTurnLost();
     }
 
+    /**
+     * Checks if all but one player have lost the current turn.
+     * If that is the case, the player who has not lost the turn has his score incremented.
+     * @return true if all but one player have lost the current turn, false otherwise.
+     */
     private boolean hasAllButOnePlayerLostCurrentTurn(){
         Player lastOneStanding = null; // used to store player who has not lost, to increment his score if he is the only one
         int playersWhoHaveNotLost=0;
@@ -122,18 +204,31 @@ public class Game {
         return false;
     }
 
+    /**
+     * Displays a message to the user when all but one player have lost the current turn, informing
+     * that he has won the turn.
+     * @param playerNickname Nickname of the player who has not lost the current turn.
+     */
     private void displayAllButOnePlayerLostCurrentTurn(String playerNickname){
         System.out.print(Color.coloredString(Color.ANSI.GREEN, "Tous les joueurs ont perdu sauf "));
         System.out.print(Color.coloredString(Color.ANSI.YELLOW, playerNickname));
         System.out.println(Color.coloredString(Color.ANSI.GREEN," qui remporte le tour. Félicitations!"));
     }
 
+    /**
+     * End of game processing :
+     * - Sorts the players by score then by name.
+     * - Displays the list of players and their scores in descending order.
+     */
     public void endOfGame(){
         assert(deck.isEmpty());
         sortPlayersByScoreThenByName();
         endOfGameDisplay();
     }
 
+    /**
+     * Displays the list of players and their scores in descending order.
+     */
     public void endOfGameDisplay(){
         int rank=1;
         for (Player p : players) {
@@ -142,20 +237,20 @@ public class Game {
         }
     }
 
-    public Card getCurrentSituation(){
-        return currentSituation;
-    }
-
-    public Card getGoalSituation(){
-        return goalSituation;
-    }
-
+    /**
+     * Sorts the players by score then by name thanks to a comparator.
+     */
     private void sortPlayersByScoreThenByName(){
         players.sort(Comparator.comparing(Player::getScore).thenComparing(Player::getNickname));
     }
 
+    /**
+     * Verifies if the player can play at a given turn (if he has not given a wrong combination yet).
+     * @param playerNickname Nickname of the player to check.
+     * @return true if the player can play, false otherwise.
+     */
     private boolean canPlayerPlay(String playerNickname){
-        if (isPlayerNonExistent(playerNickname))
+        if (doesPlayerNotExist(playerNickname))
             return false;
         for (Player p : players){
             if (p.getNickname().equals(playerNickname))
@@ -164,7 +259,12 @@ public class Game {
         return false;
     }
 
-    private boolean isPlayerNonExistent(String playerNickname){
+    /**
+     * Checks if a player does not exist in the list of players.
+     * @param playerNickname Nickname of the player to check.
+     * @return true if the player does not exist, false otherwise.
+     */
+    private boolean doesPlayerNotExist(String playerNickname){
         for (Player p : players){
             if (p.getNickname().equals(playerNickname))
                 return false;
@@ -172,6 +272,11 @@ public class Game {
         return true;
     }
 
+    /**
+     * Retrieves a player from the list of players by his nickname.
+     * @param playerNickname Nickname of the player to retrieve.
+     * @return The player with the given nickname, or null if no player has that nickname.
+     */
     private Player getPlayerByNickname(String playerNickname){
         for (Player p : players){
             if (p.getNickname().equals(playerNickname))
@@ -180,21 +285,37 @@ public class Game {
         return null;
     }
 
+    /**
+     * Uses the CombinationFinder class to find the combination that leads from the starting situation to the goal situation.
+     * Only to be used with the secret command.
+     * @return The combination that leads from the starting situation to the goal situation.
+     */
     private String findCombination(){
-        CombinationFinder finder = new CombinationFinder(currentSituation, goalSituation);
+        CombinationFinder finder = new CombinationFinder(startingSituation, goalSituation);
         return finder.findCombination();
     }
 
+    /**
+     * Displays the combination that leads from the starting situation to the goal situation.
+     * @see Game#findCombination()
+     * @see Game#SECRET_STRING
+     * @param combination Combination that leads from the starting situation to the goal situation.
+     */
     private void displayFoundCombination(String combination){
         System.out.println(Color.coloredString(Color.ANSI.GREEN, "Combinaison trouvée: " + combination));
     }
 
+    /**
+     * Does numerous checks on the combination input by the player.
+     * @param input1 Nickname of the player who is inputting the combination / secret string.
+     * @param input2 Combination input by the player.
+     */
     private void verifyCombinationInput(String input1, String input2){
         if (isFirstInputSecretString(input1)) {
             displayFoundCombination(findCombination());
             currentTurnSituationFound=true;
         }
-        else if (isPlayerNonExistent(input1))
+        else if (doesPlayerNotExist(input1))
             CombinationInputState.displayCombinationInputState(CombinationInputState.NON_EXISTENT_PLAYER);
         else if (!canPlayerPlay(input1))
             CombinationInputState.displayCombinationInputState(CombinationInputState.CANNOT_PLAY);
@@ -209,15 +330,26 @@ public class Game {
         }
     }
 
+    /**
+     * Checks if the input is the secret string.
+     * @param input Input to check.
+     * @return true if the input is the secret string, false otherwise.
+     */
     private boolean isFirstInputSecretString(String input){
         return input.equals(SECRET_STRING);
     }
 
+    /**
+     * Checks if the combination input by the player leads from the starting situation to the goal situation.
+     * @param combination Combination input by the player.
+     * @return true if the combination leads from the starting situation to the goal situation,
+     * if the combination is invalid (or throws an exception), returns false.
+     */
     private boolean checkCombination(String combination){
         try {
             if (combination.length() % Card.COMMAND_SIZE != 0)
                 return false;
-            Card copyOfCurrentSituation = new Card(currentSituation);
+            Card copyOfCurrentSituation = new Card(startingSituation);
             for (String subCommand: combination.split("(?<=\\G.{2})"))
                 copyOfCurrentSituation.executeCommand(subCommand);
             return copyOfCurrentSituation.equals(goalSituation);
@@ -227,16 +359,26 @@ public class Game {
         }
     }
 
-    private Pair<String> getCombination(){
+    /**
+     * Retrieves the input from the player.
+     * @return A pair containing the nickname of the player and the combination input by the player.
+     * If the player did not input a combination, the second element of the pair is an empty string
+     */
+    private Pair<String> getInputFromPlayer(){
         String enteredLine = playerInputScanner.nextLine();
         Scanner input = new Scanner(enteredLine);
         String player = input.next();
         String combination = "";
         if (input.hasNext())
             combination = input.next();
+        input.close();
         return new Pair<>(player, combination);
     }
 
+    /**
+     * String representation of the display at the start of each turn, with the current situation, the goal situation
+     * and the supported commands.
+     */
     @Override
     public String toString() {
         GameDisplayBuilder builder = new GameDisplayBuilder(this);

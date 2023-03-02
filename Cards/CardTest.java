@@ -1,11 +1,5 @@
 package cards;
 
-/**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Cards.CardTest.java
- * @brief Unit tests for class "Card" with various methods.
- */
-
 import podium.Animal;
 import podium.Podium;
 import org.junit.Test;
@@ -14,8 +8,13 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class CardTest {
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Cards.CardTest.java
+ * @brief Unit tests for class "Card" with various methods.
+ */
 
+public class CardTest {
     @Test
     public void testCommandKI(){
         ArrayList<Animal> blue = new ArrayList<>();

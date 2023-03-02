@@ -5,22 +5,49 @@ import cards.Card;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Game.CombinationFinder.java
+ * @brief Class finding the shortest combination of commands to get from a starting situation to a goal situation.
+ */
 public class CombinationFinder {
-    private Card startingSituation;
-    private Card goalSituation;
+    /** The starting situation */
+    private final Card startingSituation;
+    /** The goal situation that we find the combination for*/
+    private final Card goalSituation;
+
+    /**
+     * Enum representing the possible commands in the game
+     */
     enum POSSIBLE_COMMANDS{
         KI,LO,NI,MA,SO;
+        /**
+         * String representation of the enum
+         * @return associated string
+         */
         @Override
         public String toString(){
             return name();
         }
     }
+
+    /**
+     * Constructor of the class
+     * @param startingSituation the starting situation
+     * @param goalSituation the goal situation
+     */
     public CombinationFinder(Card startingSituation, Card goalSituation){
         this.startingSituation=startingSituation;
         this.goalSituation=goalSituation;
     }
 
-    public Card applyAllCommands(String combination){
+    /**
+     * Applies all commands in the combination to the starting situation, and returns the resulting copy card
+     * @param combination the combination of commands to apply
+     * @return the resulting copy card after applying all commands in the combination to the starting situation,
+     * or null if the combination is invalid (throws an exception)
+     */
+    Card applyAllCommands(String combination){
         try {
             Card temp = new Card(startingSituation);
             for (String subCommand : combination.split("(?<=\\G.{2})"))
@@ -33,6 +60,10 @@ public class CombinationFinder {
         }
     }
 
+    /**
+     * Finds the shortest combination of commands to get from the starting situation to the goal situation
+     * @return the shortest combination of commands to get from the starting situation to the goal situation
+     */
     public String findCombination(){
         Queue<String> queue = new LinkedList<>();
         queue.add("");
@@ -54,6 +85,12 @@ public class CombinationFinder {
         return null;
     }
 
+    /**
+     * Checks if the command is possible to apply on the current combination
+     * @param command to check
+     * @param currentCombination to check
+     * @return true if the command is possible to apply on the current combination, false otherwise
+     */
     public boolean isCommandPossible(POSSIBLE_COMMANDS command, String currentCombination){
         Card temp;
         if (currentCombination.length()>2)
@@ -75,5 +112,4 @@ public class CombinationFinder {
                 return false;
         }
     }
-
 }

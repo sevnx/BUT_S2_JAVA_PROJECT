@@ -1,50 +1,58 @@
 package cards;
 
+import java.util.*;
+
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Cards.DeckOfCards.java
  * @brief Class representing a deck of cards.
  */
-
-import java.util.*;
-
 public class DeckOfCards {
+    /** ArrayList representing the deck of cards */
     private ArrayList<Card> deck;
+    /** Random generator used to pick a random card from the deck */
     private final Random randomGenerator;
 
+    /**
+     * Constructor of the class that generates all possible cards thanks to the CardGenerator class.
+     */
     public DeckOfCards() {
         deck = new ArrayList<>();
         generateAllPossibleCards();
         randomGenerator = new Random();
     }
 
+    /**
+     * Utility function that generates all possible thanks to the CardGenerator class.
+     */
     private void generateAllPossibleCards(){
         CardGenerator cardGenerator = new CardGenerator();
         deck=(ArrayList<Card>)cardGenerator.getGeneratedCards();
     }
 
-    // Method to check if the deck is empty
+    /**
+     * Checks if the deck is empty.
+     * @return true if the deck is empty, false otherwise.
+     */
     public boolean isEmpty() {
         return deck.isEmpty();
     }
 
-    // Method to draw a card randomly from the deck, removing it from the deck
+    /**
+     * Picks a random card from the deck (removes it).
+     * @return the picked card.
+     */
     public Card pickRandomCard() {
         Card pickedCard=deck.get(randomGenerator.nextInt(deck.size()));
         removeCardByIndex(deck.indexOf(pickedCard));
         return pickedCard;
     }
 
+    /**
+     * Removes a card from the deck by its index.
+     * @param index index of the card to remove.
+     */
     private void removeCardByIndex(int index){
         deck.remove(index);
-    }
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Card card : deck) {
-            sb.append(card.toString());
-            sb.append(System.lineSeparator());
-        }
-        return sb.toString();
     }
 }
