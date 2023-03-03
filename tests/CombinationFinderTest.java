@@ -1,5 +1,11 @@
 package tests;
 
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Game.CombinationFinderTest.java
+ * @brief Class testing the CombinationFinder class.
+ */
+
 import cards.Card;
 import game.CombinationFinder;
 import org.junit.Test;
@@ -8,11 +14,6 @@ import podium.Podium;
 
 import static org.junit.Assert.*;
 
-/**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.CombinationFinderTest.java
- * @brief Class testing the CombinationFinder class.
- */
 public class CombinationFinderTest {
     /**
      * Test the isCommandPossible method with all possible commands.
