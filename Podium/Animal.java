@@ -1,12 +1,13 @@
 package podium;
 
-import color.Color;
-
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Podium.Animal.java
  * @brief Enumeration of animals.
  */
+
+import color.Color;
+
 public enum Animal {
     LION(Color.ANSI.YELLOW), ELEPHANT(Color.ANSI.GREY), BEAR(Color.ANSI.WHITE);
     public static final int NUMBER_OF_ANIMALS = Animal.values().length;
