@@ -3,12 +3,18 @@ package game;
 import color.Color;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.CombinationInputState.java
- * @brief Class that enumerates possible combination input states which are meant to be displayed.
+ * Class that enumerates possible combination input states which are meant to be displayed.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public enum CombinationInputState {
-    NON_EXISTENT_PLAYER, INVALID_INPUT, CANNOT_PLAY, CORRECT_INPUT;
+    /** Indicates that the player does not exist. */
+    NON_EXISTENT_PLAYER,
+    /** Indicates that the input was invalid. */
+    INVALID_INPUT,
+    /** Indicates that the player was not allowed to play. */
+    CANNOT_PLAY,
+    /** Indicates that the input was correct. */
+    CORRECT_INPUT;
 
     /**
      * Utility function that displays the combination input state, and the associated message.

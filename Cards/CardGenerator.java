@@ -8,9 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Cards.CardGenerator.java
- * @brief Class generating all possible cards.
+ * Class generating all possible cards.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 
 public class CardGenerator {

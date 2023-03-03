@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Podium.Podium.java
- * @brief Class representing a podium.
+ * Class representing a podium.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public class Podium {
     /** List of animals on the podium, from bottom to top. */
@@ -19,7 +18,7 @@ public class Podium {
     /** Index of the bottom row. */
     public static final int BOTTOM_ROW = 0;
 
-/**
+    /**
      * Empty constructor of Podium class
      */
     public Podium(){

@@ -8,9 +8,8 @@ import static podium.Podium.MIDDLE_ROW;
 import static podium.Podium.TOP_ROW;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.GameDisplayBuilder.java
- * @brief Class that builds the game display for each turn.
+ * Class that builds the game display for each turn.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public class GameDisplayBuilder {
     /** String representing the red podium name. */

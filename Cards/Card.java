@@ -6,9 +6,8 @@ import podium.Podium;
 import java.util.Objects;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Cards.Card.java
- * @brief Class representing a cards, also called a situation
+ * Class representing a cards, also called a situation
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public class Card {
     /** Blue podium (first / left one) */

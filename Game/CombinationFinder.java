@@ -6,21 +6,28 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.CombinationFinder.java
- * @brief Class finding the shortest combination of commands to get from a starting situation to a goal situation.
+ * Class finding the shortest combination of commands to get from a starting situation to a goal situation.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public class CombinationFinder {
     /** The starting situation */
     private final Card startingSituation;
     /** The goal situation that we find the combination for*/
     private final Card goalSituation;
-
     /**
      * Enum representing the possible commands in the game
      */
     public enum POSSIBLE_COMMANDS{
-        KI,LO,NI,MA,SO;
+        /** KI command : move the top animal of the blue podium to the top of the red podium */
+        KI,
+        /** LO command : move the top animal of the red podium to the top of the blue podium */
+        LO,
+        /** NI command : move the bottom animal of the blue podium to the top of the blue podium */
+        NI,
+        /** MA command : move the bottom animal of the red podium to the top of the red podium */
+        MA,
+        /** SO command : swaps top of red with top of blue podiums */
+        SO;
         /**
          * String representation of the enum
          * @return associated string

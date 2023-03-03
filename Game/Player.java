@@ -1,9 +1,8 @@
 package game;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.Player.java
- * @brief Class representing a player in the game.
+ * Class representing a player in the game.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 
 public class Player {

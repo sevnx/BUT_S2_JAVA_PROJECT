@@ -3,9 +3,8 @@ package cards;
 import java.util.*;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Cards.DeckOfCards.java
- * @brief Class representing a deck of cards.
+ * Class representing a deck of cards.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public class DeckOfCards {
     /** ArrayList representing the deck of cards */

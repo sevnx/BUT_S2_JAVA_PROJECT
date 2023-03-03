@@ -6,9 +6,9 @@ import java.util.List;
 import static java.util.Collections.swap;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Cards.AnimalPermutationGenerator.java
- * @brief Class generating all possible permutations of animals.
+ * Class generating all possible permutations of animals.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
+ * @param <E> Type of the values we want to generate permutations of.
  */
 public class PermutationGenerator<E> {
     /** List of all possible permutations. */

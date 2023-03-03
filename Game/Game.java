@@ -12,9 +12,8 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.Game.java
- * @brief Class representing the game.
+ * Class representing the game.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public class Game {
     /** Secret string to reveal the combination to get the goal situation (as requested by D.Poitrenaud) */
