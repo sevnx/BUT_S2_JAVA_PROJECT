@@ -5,6 +5,7 @@ package color;
  * @file Game.Color.java
  * @brief Class that takes care of the colors.
  */
+
 public class Color {
     public enum ANSI {
         /** ANSI reset code. */
