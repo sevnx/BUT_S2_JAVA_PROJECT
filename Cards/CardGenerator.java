@@ -11,7 +11,6 @@ import java.util.List;
  * Class generating all possible cards.
  * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
-
 public class CardGenerator {
     /** List of all possible combinations of animals with a single podium. */
     private final List<ArrayList<Animal>> basePermutations;
