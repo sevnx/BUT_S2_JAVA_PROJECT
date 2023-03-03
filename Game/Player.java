@@ -4,7 +4,6 @@ package game;
  * Class representing a player in the game.
  * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
-
 public class Player {
     /** Nickname of the player. */
     private final String nickname;
