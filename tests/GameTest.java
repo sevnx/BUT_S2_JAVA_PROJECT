@@ -1,15 +1,16 @@
 package tests;
 
-import game.Game;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Game.GameTest.java
  * @brief Unit tests for class "Game" with various methods.
  */
+
+import game.Game;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
 public class GameTest {
 
     @Test
