@@ -301,10 +301,8 @@ public class Game {
      * @param input2 Combination input by the player.
      */
     private void verifyPlayerCombinationInput(String input1, String input2){
-        if (isSecretString(input1)) {
+        if (isSecretString(input1))
             displayFoundCombination(findCombination());
-            currentTurnSituationFound=true;
-        }
         else if (doesPlayerNotExist(input1))
             CombinationInputState.displayCombinationInputState(CombinationInputState.NON_EXISTENT_PLAYER);
         else if (!canPlayerPlay(input1))
