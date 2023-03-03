@@ -1,10 +1,10 @@
 package tests;
 
-import cards.Card;
-import game.CombinationFinder;
+import card.Card;
+import games.CombinationFinder;
 import org.junit.Test;
-import podium.Animal;
-import podium.Podium;
+import podiums.Animal;
+import podiums.Podium;
 
 import static org.junit.Assert.*;
 

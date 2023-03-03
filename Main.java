@@ -1,9 +1,9 @@
-import game.Game;
+import games.Game;
 
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Main.java
- * @brief Main class for the game.
+ * @brief Main class for the games.
  */
 
 public class Main {

@@ -1,8 +1,8 @@
 package tests;
 
 import org.junit.Test;
-import podium.Animal;
-import podium.Podium;
+import podiums.Animal;
+import podiums.Podium;
 
 import java.util.ArrayList;
 import java.util.Arrays;
