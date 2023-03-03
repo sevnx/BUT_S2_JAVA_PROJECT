@@ -1,11 +1,12 @@
 package podium;
 
-import color.Color;
-
 /**
  * Enumeration of animals.
  * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
+
+import color.Color;
+
 public enum Animal {
     /** Lion. */
     LION(Color.ANSI.YELLOW),

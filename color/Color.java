@@ -4,6 +4,7 @@ package color;
  * Class that takes care of the colors.
  * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
+
 public class Color {
     /** Enumeration of the ANSI color codes. */
     public enum ANSI {
