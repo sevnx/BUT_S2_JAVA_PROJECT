@@ -1,5 +1,11 @@
 package tests;
 
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Cards.CardTest.java
+ * @brief Unit tests for class "Card" with various methods.
+ */
+
 import cards.Card;
 import podium.Animal;
 import podium.Podium;
@@ -8,12 +14,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
-
-/**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Cards.CardTest.java
- * @brief Unit tests for class "Card" with various methods.
- */
 
 public class CardTest {
     @Test
