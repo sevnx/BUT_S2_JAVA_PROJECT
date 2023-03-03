@@ -9,6 +9,7 @@ import java.util.Objects;
  * Class representing a cards, also called a situation
  * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
+
 public class Card {
     /** Blue podium (first / left one) */
     private final Podium blue;
