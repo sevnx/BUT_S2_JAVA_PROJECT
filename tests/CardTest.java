@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Cards.CardTest.java
- * @brief Unit tests for class "Card" with various methods.
+ * Unit tests for class "Card" with various methods.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 
 public class CardTest {
+    /** Tests the KI command. */
     @Test
     public void testCommandKI(){
         ArrayList<Animal> blue = new ArrayList<>();
@@ -29,6 +29,7 @@ public class CardTest {
         assertEquals(Animal.ELEPHANT, card.getRed().getTop());
     }
 
+    /** Tests equals with the same card. */
     @Test
     public void testEqualWithSelf(){
         ArrayList<Animal> blue = new ArrayList<>();
@@ -40,6 +41,7 @@ public class CardTest {
         assertEquals(card1, card1);
     }
 
+    /** Tests equals with a copy of a card. */
     @Test
     public void testEqualsWithCopy() {
         ArrayList<Animal> red = new ArrayList<>();
@@ -52,6 +54,7 @@ public class CardTest {
         assertEquals(card1, card2);
     }
 
+    /** Test not equals with a different card. */
     @Test
     public void testNotEquals() {
         ArrayList<Animal> red = new ArrayList<>();
@@ -64,6 +67,7 @@ public class CardTest {
         assertNotEquals(card1, card2);
     }
 
+    /** Test equals while using commands. */
     @Test
     public void testEqualsWithCommands(){
         ArrayList<Animal> blue1 = new ArrayList<>();

@@ -10,11 +10,13 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Podium.PodiumTest.java
- * @brief Unit tests for class "Podium" with various methods.
+ * Unit tests for class "Podium" with various methods.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public class PodiumTest {
+    /**
+     * Tests adding an animal at the top of the podium.
+     */
     @Test
     public void testAddAtTop(){
         Podium podium = new Podium();
@@ -22,6 +24,9 @@ public class PodiumTest {
         assertEquals(Animal.BEAR, podium.getTop());
     }
 
+    /**
+     * Tests removing an animal at the top of the podium.
+     */
     @Test
     public void testRemoveAtTop(){
         Podium podium = new Podium();
@@ -30,6 +35,7 @@ public class PodiumTest {
         assertTrue(podium.isEmpty());
     }
 
+    /** Test removing an animal at the bottom of the podium. */
     @Test
     public void testRemoveAtBottom(){
         Podium podium = new Podium();
@@ -38,12 +44,14 @@ public class PodiumTest {
         assertTrue(podium.isEmpty());
     }
 
+    /** Tests the equals method with the same podium. */
     @Test
     public void testEqualsWithSelf(){
         Podium podium = new Podium(new ArrayList<>(Arrays.asList(Animal.values())));
         assertEquals(podium, podium);
     }
 
+    /** Tests the equals method with a copy of a podium. */
     @Test
     public void testEqualsWithCopy(){
         Podium podium = new Podium(new ArrayList<>(Arrays.asList(Animal.values())));
@@ -51,6 +59,7 @@ public class PodiumTest {
         assertEquals(podium, podium2);
     }
 
+    /** Tests the equals method with different podiums. */
     @Test
     public void testNotEquals(){
         Podium podium = new Podium(new ArrayList<>(Arrays.asList(Animal.values())));
@@ -59,6 +68,7 @@ public class PodiumTest {
         assertNotEquals(podium, podium2);
     }
 
+    /** Tests equals methods with moving animals. */
     @Test
     public void testEqualsWithManualAddAndMultipleAnimals(){
         Podium podium = new Podium();

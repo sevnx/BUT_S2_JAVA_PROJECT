@@ -9,9 +9,8 @@ import podium.Podium;
 import static org.junit.Assert.*;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.CombinationFinderTest.java
- * @brief Class testing the CombinationFinder class.
+ * Unit tests for class "CombinationFinder" with various methods.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public class CombinationFinderTest {
     /**

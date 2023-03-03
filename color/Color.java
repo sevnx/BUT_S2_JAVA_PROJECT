@@ -1,11 +1,11 @@
 package color;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.Color.java
- * @brief Class that takes care of the colors.
+ * Class that takes care of the colors.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public class Color {
+    /** Enumeration of the ANSI color codes. */
     public enum ANSI {
         /** ANSI reset code. */
         RESET("\u001B[0m"),

@@ -6,9 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Game.PlayerTest.java
- * @brief Unit tests for class "Player" with various methods.
+ * Unit tests for class "Player" with various methods.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
 public class PlayerTest {
     /**
