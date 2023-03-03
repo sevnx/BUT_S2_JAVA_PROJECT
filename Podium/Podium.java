@@ -1,14 +1,15 @@
 package podium;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Podium.Podium.java
  * @brief Class representing a podium.
  */
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class Podium {
     /** List of animals on the podium, from bottom to top. */
     private final ArrayList<Animal> animals;
