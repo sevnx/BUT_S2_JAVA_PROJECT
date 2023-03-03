@@ -88,7 +88,7 @@ public class Game {
      * @param nicknames List of nicknames to check.
      * @return true if there are duplicate nicknames, false otherwise.
      */
-    private boolean hasDoubleNicknames(String[] nicknames){
+    public static boolean hasDoubleNicknames(String[] nicknames){
         for (int i = 0; i < nicknames.length; i++) {
             for (int j = i+1; j < nicknames.length; j++) {
                 if (nicknames[i].equals(nicknames[j]))
@@ -104,7 +104,6 @@ public class Game {
      * At the end of the game, the list of players and their scores is displayed in descending order.
      */
     public void play() {
-        pickStartOfGameSituation();
         while (!deck.isEmpty()){
             turn();
         }
@@ -123,26 +122,9 @@ public class Game {
         System.out.println(this);
         while (!hasAllButOnePlayerLostCurrentTurn() && !currentTurnSituationFound){
             Pair<String> playerInput = getInputFromPlayer();
-            verifyCombinationInput(playerInput.getFirst(), playerInput.getSecond());
+            verifyPlayerCombinationInput(playerInput.getFirst(), playerInput.getSecond());
         }
         changeCurrentSituationToGoalSituation();
-    }
-
-    /**
-     * Changes the current situation to the goal situation.
-     * Happens at the end of a turn
-     * (by the rules at the end of a turn, the current situation becomes the goal situation).
-     */
-    private void changeCurrentSituationToGoalSituation(){
-        startingSituation = goalSituation;
-    }
-
-    /**
-     * Picks the starting situation of the game (only called at the start of the game, because after
-     * that the current situation becomes the goal situation at the end of each turn).
-     */
-    private void pickStartOfGameSituation(){
-        startingSituation = deck.pickRandomCard();
     }
 
     /**
@@ -162,6 +144,15 @@ public class Game {
      */
     private void pickTurnGoalSituation(){
         goalSituation = deck.pickRandomCard();
+    }
+
+    /**
+     * Changes the current situation to the goal situation.
+     * Happens at the end of a turn
+     * (by the rules at the end of a turn, the current situation becomes the goal situation).
+     */
+    private void changeCurrentSituationToGoalSituation(){
+        startingSituation = goalSituation;
     }
 
     /**
@@ -187,7 +178,7 @@ public class Game {
      * If that is the case, the player who has not lost the turn has his score incremented.
      * @return true if all but one player have lost the current turn, false otherwise.
      */
-    private boolean hasAllButOnePlayerLostCurrentTurn(){
+    public boolean hasAllButOnePlayerLostCurrentTurn(){
         Player lastOneStanding = null; // used to store player who has not lost, to increment his score if he is the only one
         int playersWhoHaveNotLost=0;
         for (Player p : players){
@@ -227,9 +218,16 @@ public class Game {
     }
 
     /**
+     * Sorts the players by score then by name thanks to a comparator.
+     */
+    private void sortPlayersByScoreThenByName(){
+        players.sort(Comparator.comparing(Player::getScore).thenComparing(Player::getNickname));
+    }
+
+    /**
      * Displays the list of players and their scores in descending order.
      */
-    public void endOfGameDisplay(){
+    private void endOfGameDisplay(){
         int rank=1;
         for (Player p : players) {
             System.out.print((rank++) + ". ");
@@ -238,18 +236,11 @@ public class Game {
     }
 
     /**
-     * Sorts the players by score then by name thanks to a comparator.
-     */
-    private void sortPlayersByScoreThenByName(){
-        players.sort(Comparator.comparing(Player::getScore).thenComparing(Player::getNickname));
-    }
-
-    /**
      * Verifies if the player can play at a given turn (if he has not given a wrong combination yet).
      * @param playerNickname Nickname of the player to check.
      * @return true if the player can play, false otherwise.
      */
-    private boolean canPlayerPlay(String playerNickname){
+    public boolean canPlayerPlay(String playerNickname){
         if (doesPlayerNotExist(playerNickname))
             return false;
         for (Player p : players){
@@ -264,7 +255,7 @@ public class Game {
      * @param playerNickname Nickname of the player to check.
      * @return true if the player does not exist, false otherwise.
      */
-    private boolean doesPlayerNotExist(String playerNickname){
+    public boolean doesPlayerNotExist(String playerNickname){
         for (Player p : players){
             if (p.getNickname().equals(playerNickname))
                 return false;
@@ -310,8 +301,8 @@ public class Game {
      * @param input1 Nickname of the player who is inputting the combination / secret string.
      * @param input2 Combination input by the player.
      */
-    private void verifyCombinationInput(String input1, String input2){
-        if (isFirstInputSecretString(input1)) {
+    private void verifyPlayerCombinationInput(String input1, String input2){
+        if (isSecretString(input1)) {
             displayFoundCombination(findCombination());
             currentTurnSituationFound=true;
         }
@@ -332,11 +323,11 @@ public class Game {
 
     /**
      * Checks if the input is the secret string.
-     * @param input Input to check.
+     * @param s string to check.
      * @return true if the input is the secret string, false otherwise.
      */
-    private boolean isFirstInputSecretString(String input){
-        return input.equals(SECRET_STRING);
+    public static boolean isSecretString(String s){
+        return s.equals(SECRET_STRING);
     }
 
     /**

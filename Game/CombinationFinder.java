@@ -19,7 +19,7 @@ public class CombinationFinder {
     /**
      * Enum representing the possible commands in the game
      */
-    enum POSSIBLE_COMMANDS{
+    public enum POSSIBLE_COMMANDS{
         KI,LO,NI,MA,SO;
         /**
          * String representation of the enum
@@ -47,7 +47,7 @@ public class CombinationFinder {
      * @return the resulting copy card after applying all commands in the combination to the starting situation,
      * or null if the combination is invalid (throws an exception)
      */
-    Card applyAllCommands(String combination){
+    public Card applyAllCommands(String combination){
         try {
             Card temp = new Card(startingSituation);
             for (String subCommand : combination.split("(?<=\\G.{2})"))
@@ -73,12 +73,12 @@ public class CombinationFinder {
                 if (isCommandPossible(command, currentCombination)){
                     String newCombination = currentCombination + command;
                     Card newCardWithCombination = applyAllCommands(newCombination);
-                    if (newCardWithCombination == null)
-                        continue;
-                    else if (newCardWithCombination.equals(goalSituation))
-                        return newCombination;
-                    else if (!newCardWithCombination.equals(startingSituation))
-                        queue.add(newCombination);
+                    if (newCardWithCombination != null) {
+                        if (newCardWithCombination.equals(goalSituation))
+                            return newCombination;
+                        else if (!newCardWithCombination.equals(startingSituation))
+                            queue.add(newCombination);
+                    }
                 }
             }
         } while (!queue.isEmpty());

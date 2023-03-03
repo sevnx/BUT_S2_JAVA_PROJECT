@@ -1,6 +1,7 @@
-package game;
+package tests;
 
 import cards.Card;
+import game.CombinationFinder;
 import org.junit.Test;
 import podium.Animal;
 import podium.Podium;
@@ -24,9 +25,11 @@ public class CombinationFinderTest {
         Card test = new Card(blue, red);
         Card test2 = new Card(red, blue);
         CombinationFinder finder = new CombinationFinder(test, test2);
-        for (CombinationFinder.POSSIBLE_COMMANDS command : CombinationFinder.POSSIBLE_COMMANDS.values()) {
-            assertFalse(finder.isCommandPossible(command,""));
-        }
+        assertFalse(finder.isCommandPossible(CombinationFinder.POSSIBLE_COMMANDS.KI,""));
+        assertFalse(finder.isCommandPossible(CombinationFinder.POSSIBLE_COMMANDS.NI,""));
+        assertFalse(finder.isCommandPossible(CombinationFinder.POSSIBLE_COMMANDS.LO,""));
+        assertFalse(finder.isCommandPossible(CombinationFinder.POSSIBLE_COMMANDS.MA,""));
+        assertFalse(finder.isCommandPossible(CombinationFinder.POSSIBLE_COMMANDS.SO,""));
     }
 
     /**

@@ -24,7 +24,9 @@ public class Color {
         /** ANSI cyan color code. */
         CYAN("\u001B[36m"),
         /** ANSI white color code. */
-        WHITE("\u001B[37m");
+        WHITE("\u001B[37m"),
+        /** ANSI grey color code. */
+        GREY("\u001B[90m");
 
         /** ANSI code. */
         private final String code;

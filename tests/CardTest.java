@@ -1,5 +1,6 @@
-package cards;
+package tests;
 
+import cards.Card;
 import podium.Animal;
 import podium.Podium;
 import org.junit.Test;

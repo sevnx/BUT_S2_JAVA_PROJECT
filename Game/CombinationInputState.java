@@ -7,10 +7,13 @@ import color.Color;
  * @file Game.CombinationInputState.java
  * @brief Class that enumerates possible combination input states which are meant to be displayed.
  */
-
 public enum CombinationInputState {
     NON_EXISTENT_PLAYER, INVALID_INPUT, CANNOT_PLAY, CORRECT_INPUT;
 
+    /**
+     * Utility function that displays the combination input state, and the associated message.
+     * @param state Combination input state to display.
+     */
     public static void displayCombinationInputState(CombinationInputState state){
         switch (state){
             case NON_EXISTENT_PLAYER:

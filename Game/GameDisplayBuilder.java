@@ -1,6 +1,7 @@
 package game;
 
 import color.Color;
+import podium.Animal;
 
 import static podium.Podium.BOTTOM_ROW;
 import static podium.Podium.MIDDLE_ROW;
@@ -40,7 +41,7 @@ public class GameDisplayBuilder {
      * @return centered string
      */
     private String centerString(String string, int width) {
-        String out = String.format("%"+width+"string%string%"+width+"string", "",string,"");
+        String out = String.format("%"+width+"s%s%"+width+"s", "",string,"");
         float mid = (out.length()/2);
         float start = mid - (width/2);
         float end = start + width;
@@ -67,11 +68,21 @@ public class GameDisplayBuilder {
      * @return String representation of the row.
      */
     private String getRow(int index) {
-        return centerString(game.getStartingSituation().getBlue().getAnimalStringByIndex(index),COLUMN_SIZE)+
-                centerString(game.getStartingSituation().getRed().getAnimalStringByIndex(index),COLUMN_SIZE)+
+        Animal stratingBlueAnimal = game.getStartingSituation().getBlue().getAnimalByIndex(index);
+        Animal stratingRedAnimal = game.getStartingSituation().getRed().getAnimalByIndex(index);
+        Animal goalBlueAnimal = game.getGoalSituation().getBlue().getAnimalByIndex(index);
+        Animal goalRedAnimal = game.getGoalSituation().getRed().getAnimalByIndex(index);
+        return getColoredAnimalString(stratingRedAnimal)+
+                getColoredAnimalString(stratingBlueAnimal)+
                 String.format("%" + SEPARATOR_SIZE + "s", " ")+
-                centerString(game.getGoalSituation().getBlue().getAnimalStringByIndex(index),COLUMN_SIZE)+
-                centerString(game.getGoalSituation().getRed().getAnimalStringByIndex(index),COLUMN_SIZE);
+                getColoredAnimalString(goalBlueAnimal)+
+                getColoredAnimalString(goalRedAnimal);
+    }
+
+    private String getColoredAnimalString(Animal animal){
+        if (animal == null)
+            return centerString("",COLUMN_SIZE);
+        return Color.coloredString(animal.getColor(), centerString(animal.toString(),COLUMN_SIZE));
     }
 
     /**
