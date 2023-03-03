@@ -1,15 +1,16 @@
 package game;
 
-import cards.Card;
-
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Game.CombinationFinder.java
  * @brief Class finding the shortest combination of commands to get from a starting situation to a goal situation.
  */
+
+import cards.Card;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class CombinationFinder {
     /** The starting situation */
     private final Card startingSituation;
