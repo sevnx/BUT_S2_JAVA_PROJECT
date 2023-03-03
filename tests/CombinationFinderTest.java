@@ -1,10 +1,10 @@
 package tests;
 
-import card.Card;
-import games.CombinationFinder;
+import cards.Card;
+import game.CombinationFinder;
 import org.junit.Test;
-import podiums.Animal;
-import podiums.Podium;
+import podium.Animal;
+import podium.Podium;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class CombinationFinderTest {
     /**
      * Test the isCommandPossible method with all possible commands.
-     * Creates empty podiums, so all commands should be impossible and return false.
+     * Creates empty podium, so all commands should be impossible and return false.
      */
     @Test
     public void testIsCommandPossible_AllCommandsImpossible(){

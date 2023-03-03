@@ -1,8 +1,8 @@
 package tests;
 
-import card.Card;
-import podiums.Animal;
-import podiums.Podium;
+import cards.Card;
+import podium.Animal;
+import podium.Podium;
 import org.junit.Test;
 
 import java.util.ArrayList;
