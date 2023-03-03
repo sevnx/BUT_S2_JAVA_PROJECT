@@ -6,6 +6,7 @@ import java.util.*;
  * Class representing a deck of cards.
  * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
+
 public class DeckOfCards {
     /** ArrayList representing the deck of cards */
     private ArrayList<Card> deck;
