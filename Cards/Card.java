@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
  * @file Cards.Card.java
- * @brief Class representing a card, also called a situation
+ * @brief Class representing a cards, also called a situation
  */
 public class Card {
     /** Blue podium (first / left one) */
@@ -113,7 +113,7 @@ public class Card {
     }
 
     /**
-     * Executes the SO command that swaps the top animals of the blue and red podiums
+     * Executes the SO command that swaps the top animals of the blue and red podium
      */
     private void commandSO(){
         Animal redTop=red.getTop();
@@ -170,7 +170,7 @@ public class Card {
     }
 
     /**
-     * Checks if cards are equal, which means that they have the same podiums
+     * Checks if cards are equal, which means that they have the same podium
      */
     @Override
     public boolean equals(Object o) {
@@ -181,7 +181,7 @@ public class Card {
     }
 
     /**
-     * Hashcode of a card
+     * Hashcode of a cards
      */
     @Override
     public int hashCode() {

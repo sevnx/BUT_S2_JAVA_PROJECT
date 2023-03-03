@@ -10,7 +10,7 @@ import java.util.*;
 public class DeckOfCards {
     /** ArrayList representing the deck of cards */
     private ArrayList<Card> deck;
-    /** Random generator used to pick a random card from the deck */
+    /** Random generator used to pick a random cards from the deck */
     private final Random randomGenerator;
 
     /**
@@ -39,8 +39,8 @@ public class DeckOfCards {
     }
 
     /**
-     * Picks a random card from the deck (removes it).
-     * @return the picked card.
+     * Picks a random cards from the deck (removes it).
+     * @return the picked cards.
      */
     public Card pickRandomCard() {
         Card pickedCard=deck.get(randomGenerator.nextInt(deck.size()));
@@ -49,8 +49,8 @@ public class DeckOfCards {
     }
 
     /**
-     * Removes a card from the deck by its index.
-     * @param index index of the card to remove.
+     * Removes a cards from the deck by its index.
+     * @param index index of the cards to remove.
      */
     private void removeCardByIndex(int index){
         deck.remove(index);

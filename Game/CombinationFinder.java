@@ -42,9 +42,9 @@ public class CombinationFinder {
     }
 
     /**
-     * Applies all commands in the combination to the starting situation, and returns the resulting copy card
+     * Applies all commands in the combination to the starting situation, and returns the resulting copy cards
      * @param combination the combination of commands to apply
-     * @return the resulting copy card after applying all commands in the combination to the starting situation,
+     * @return the resulting copy cards after applying all commands in the combination to the starting situation,
      * or null if the combination is invalid (throws an exception)
      */
     public Card applyAllCommands(String combination){

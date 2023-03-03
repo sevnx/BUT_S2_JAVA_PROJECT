@@ -108,9 +108,9 @@ public class Podium {
     }
 
     /**
-     * Compares two podiums
+     * Compares two podium
      * @param o Podium to compare
-     * @return True if the podiums are equal, false otherwise
+     * @return True if the podium are equal, false otherwise
      */
     @Override
     public boolean equals(Object o) {

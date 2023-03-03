@@ -63,7 +63,7 @@ public class GameDisplayBuilder {
     }
 
     /**
-     * Gets one of the rows of all the podiums by index.
+     * Gets one of the rows of all the podium by index.
      * @param index index of the row to get
      * @return String representation of the row.
      */
@@ -86,7 +86,7 @@ public class GameDisplayBuilder {
     }
 
     /**
-     * Gets the separator row of the display, displayed under the rows and above the colors of the podiums.
+     * Gets the separator row of the display, displayed under the rows and above the colors of the podium.
      * @return String representation of the separator row.
      */
     private String getSepartorRow(){

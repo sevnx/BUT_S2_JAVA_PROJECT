@@ -140,7 +140,7 @@ public class Game {
     }
 
     /**
-     * Picks the goal situation for the turn, from the deck of cards, removing that card from the deck.
+     * Picks the goal situation for the turn, from the deck of cards, removing that cards from the deck.
      */
     private void pickTurnGoalSituation(){
         goalSituation = deck.pickRandomCard();
