@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
  * Unit tests for class "Card" with various methods.
  * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
  */
-
 public class CardTest {
     /** Tests the KI command. */
     @Test

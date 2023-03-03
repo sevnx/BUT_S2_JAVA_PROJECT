@@ -1,15 +1,14 @@
 package tests;
 
-/**
- * Unit tests for class "Game" with various methods.
- * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
- */
-
 import game.Game;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests for class "Game" with various methods.
+ * @author Seweryn CZYKINOWSKI / Corentin LENCLOS
+ */
 public class GameTest {
 
     /** Tests the constructor of the class. */
