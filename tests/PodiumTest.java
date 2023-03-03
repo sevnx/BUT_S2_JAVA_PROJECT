@@ -1,5 +1,11 @@
 package tests;
 
+/**
+ * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
+ * @file Podium.PodiumTest.java
+ * @brief Unit tests for class "Podium" with various methods.
+ */
+
 import org.junit.Test;
 import podium.Animal;
 import podium.Podium;
@@ -9,11 +15,6 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-/**
- * @author Seweryn CZYKINOWSKI & Corentin LENCLOS
- * @file Podium.PodiumTest.java
- * @brief Unit tests for class "Podium" with various methods.
- */
 public class PodiumTest {
     @Test
     public void testAddAtTop(){
