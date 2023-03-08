@@ -6,7 +6,7 @@ import game.Game;
  */
 public class Main {
     /**
-     * Main method.
+     * Main method
      * @param args Arguments given to the program.
      */
     public static void main(String[] args) {
