@@ -71,8 +71,8 @@ public class GameDisplayBuilder {
         Animal stratingRedAnimal = game.getStartingSituation().getRed().getAnimalByIndex(index);
         Animal goalBlueAnimal = game.getGoalSituation().getBlue().getAnimalByIndex(index);
         Animal goalRedAnimal = game.getGoalSituation().getRed().getAnimalByIndex(index);
-        return getColoredAnimalString(stratingRedAnimal)+
-                getColoredAnimalString(stratingBlueAnimal)+
+        return getColoredAnimalString(stratingBlueAnimal)+
+                getColoredAnimalString(stratingRedAnimal)+
                 String.format("%" + SEPARATOR_SIZE + "s", " ")+
                 getColoredAnimalString(goalBlueAnimal)+
                 getColoredAnimalString(goalRedAnimal);

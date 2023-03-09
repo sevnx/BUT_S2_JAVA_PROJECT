@@ -83,7 +83,7 @@ public class CombinationFinder {
                     if (newCardWithCombination != null) {
                         if (newCardWithCombination.equals(goalSituation))
                             return newCombination;
-                        else if (!newCardWithCombination.equals(startingSituation))
+                        if (!newCardWithCombination.equals(startingSituation))
                             queue.add(newCombination);
                     }
                 }

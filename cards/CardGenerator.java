@@ -40,7 +40,7 @@ public class CardGenerator {
                 red.clear();
                 blue.addAll(combination.subList(0,i));
                 red.addAll(combination.subList(i,Animal.NUMBER_OF_ANIMALS));
-                generatedCards.add(new Card(new Podium(red),new Podium(blue)));
+                generatedCards.add(new Card(new Podium(blue),new Podium(red)));
             }
         }
     }
