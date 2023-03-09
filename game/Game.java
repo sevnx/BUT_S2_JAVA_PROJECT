@@ -198,6 +198,8 @@ public class Game {
      * Displays a message to the user when all but one player have lost the current turn, informing
      * that he has won the turn.
      * @param playerNickname Nickname of the player who has not lost the current turn.
+     * @pre getPlayerByNickname(playerNickname) != null
+     * @see Game#hasAllButOnePlayerLostCurrentTurn()
      */
     private void displayAllButOnePlayerLostCurrentTurn(String playerNickname){
         System.out.print(Color.coloredString(Color.ANSI.GREEN, "Tous les joueurs ont perdu sauf "));
@@ -217,10 +219,11 @@ public class Game {
     }
 
     /**
-     * Sorts the players by score then by name thanks to a comparator.
+     * Sorts the players by score then by name thanks to Comparator
+     * @see Comparator
      */
     private void sortPlayersByScoreThenByName(){
-        players.sort(Comparator.comparing(Player::getScore).thenComparing(Player::getNickname));
+        players.sort(Comparator.comparing(Player::getScore).reversed().thenComparing(Player::getNickname));
     }
 
     /**
